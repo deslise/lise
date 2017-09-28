@@ -1,4 +1,6 @@
-from managedata.models import Keyword, Business, Review
+from managedata.mining.classification import AnalyzeVader
+from managedata.mining.organization import Organization
+from managedata.models import Keyword, Business, Review, Opinion
 import googlemaps as g
 
 class CollectRival(object):
@@ -42,12 +44,27 @@ class CollectReview(object):
 
     def reviewAll(self):
         places_ids = list(map(lambda x: x.place_id, Business.objects.filter(category=self.category)))
+        reviews_ids = list(map(lambda x: x.review_id, Review.objects.filter(business__category=self.category)))
         for id in places_ids:
             result = g.places.place(self.client, id, language=None)['result']
             business = Business.objects.get(place_id=id)
             for review in result.setdefault('reviews', {}):
-                author_id = review['author_url'].split('/')[5]
-                Review.objects.create(author_id=author_id, complete_text=review['text'], business=business)
+                review_id = review['author_url'].split('/')[5] + '/' + id
+                if review_id not in reviews_ids and review['text'] != '':
+                    review = Review.objects.create(review_id=review_id, complete_text=review['text'], business=business)
+                    self.saveOpinions(review)
+
+
+    def saveOpinions(self, review):
+        org = Organization()
+        sentences = org.separate_sentences(review.complete_text)
+        pattern = org.pattern_regex('managedata/util/stopwords.txt')
+        sentences_dict = org.generate_keywords(sentences, pattern)
+        vader = AnalyzeVader()
+        for sentence in sentences_dict.items():
+            polarity = vader.polarity(sentence[0])
+            Opinion.objects.create(text_pt=sentence[1], text_en=sentence[0], polarity=polarity, review=review)
+
 
 
 

@@ -37,7 +37,7 @@ class Business(models.Model):
 
 
 class Review(models.Model):
-    author_id = models.CharField(max_length=50)
+    review_id = models.CharField(max_length=50)
     complete_text = models.CharField(max_length=500)
     business = models.ForeignKey('Business', on_delete=models.CASCADE, related_name='reviews')
 
@@ -48,7 +48,7 @@ class Review(models.Model):
 class Opinion(models.Model):
     text_pt = models.CharField(max_length=500)
     text_en = models.CharField(max_length=500)
-    polality = models.IntegerField()
+    polarity = models.IntegerField()
     review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='opinions')
 
     def __str__(self):
