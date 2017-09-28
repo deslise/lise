@@ -37,13 +37,15 @@ class Organization(object):
         return stop_word_pattern
 
     def remove_verbs(self, phrase):
-        if phrase != '':
+        try:
             sentence = self.cogroo.analyze(phrase).sentences[0].tokens
             for word in sentence:
                 if word.pos == 'v-fin':
                     person = word.feat.split('=')[1]
                     if person == '1S' or word.lemma == 'ser':
                         phrase = phrase.replace(word.lexeme, '')
+        except:
+            return ''
         return phrase
 
     def clean_sentence(self, sentence, pattern_regex):

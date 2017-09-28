@@ -1,6 +1,6 @@
 from managedata.mining.classification import AnalyzeVader
 from managedata.mining.organization import Organization
-from managedata.models import Keyword, Business, Review, Opinion
+from managedata.models import Keyword, Business, Review, Opinion, Weekday
 import googlemaps as g
 
 class CollectRival(object):
@@ -17,10 +17,24 @@ class CollectRival(object):
         places_ids = list(map(lambda x: x.place_id, Business.objects.filter(category=self.category)))
         for place in result:
             if place['place_id'] not in places_ids:
-                Business.objects.create(name=place['name'], place_id=place['place_id'], category=self.category)
+                business = Business.objects.create(name=place['name'],
+                                        place_id=place['place_id'],
+                                        category=self.category,
+                                        location=place['geometry']['location'])
+                self.collect_opening_hours(place['place_id'], business)
+
+
+
+    def collect_opening_hours(self, place_id, business):
+        result = g.places.place(self.client, place_id, language=None)['result']
+        if 'opening_hours' in result:
+            for item in result['opening_hours']['weekday_text']:
+                items = item.split(': ')
+                Weekday.objects.create(weekday=items[0], hours=items[1], business=business)
 
 
     def placesAll(self):
+        print('places')
         placesList = []
         for query in self.keywords:
             result = self.client.places(query, self.location)

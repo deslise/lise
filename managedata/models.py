@@ -3,6 +3,15 @@ from django.db import models
 
 # Create your models here.
 
+class Enterprising(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.user.first_name
+
+
+
 class Branch(models.Model):
     name = models.CharField(max_length=240)
 
@@ -31,10 +40,21 @@ class Business(models.Model):
     name = models.CharField(max_length=100)
     place_id = models.CharField(max_length=50)
     category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='related_business')
+    location = models.CharField(max_length=100)
+
 
     def __str__(self):
         return self.name
 
+
+class Weekday(models.Model):
+    weekday = models.CharField(max_length=20)
+    hours = models.CharField(max_length=20)
+    business = models.ForeignKey('Business', on_delete=models.CASCADE, related_name='weekdays')
+
+    def __str__(self):
+        return self.weekday + ' - ' + self.business.name
+    
 
 class Review(models.Model):
     review_id = models.CharField(max_length=50)
@@ -68,7 +88,8 @@ class BusinessPlan(models.Model):
 
     description = models.CharField(max_length=240)
     location = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    enterprising = models.OneToOneField('Enterprising', on_delete=models.CASCADE)
+    create_date = models.DateField()
 
     class Meta:
         abstract = True
@@ -78,14 +99,14 @@ class LateBusinessPlan(BusinessPlan):
     business = models.OneToOneField('Business', on_delete=models.CASCADE, related_name='late_business_plan')
 
     def __str__(self):
-        return self.description + ' (late)'
+        return self.business.name + ' (BusinessPlan)'
 
 
 class EarlyBusinessPlan(BusinessPlan):
     category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='early_business_plans')
 
     def __str__(self):
-        return self.description + ' (early)'
+        return self.category.specialty + ' (BusinessPlan)'
 
 
 
