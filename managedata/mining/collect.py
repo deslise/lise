@@ -34,7 +34,6 @@ class CollectRival(object):
 
 
     def placesAll(self):
-        print('places')
         placesList = []
         for query in self.keywords:
             result = self.client.places(query, self.location)

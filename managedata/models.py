@@ -23,6 +23,7 @@ class Branch(models.Model):
 class CategoryBusiness(models.Model):
     specialty = models.CharField(max_length=240)
     branch = models.ForeignKey('Branch', related_name='categories')
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.specialty
@@ -54,7 +55,7 @@ class Weekday(models.Model):
 
     def __str__(self):
         return self.weekday + ' - ' + self.business.name
-    
+
 
 class Review(models.Model):
     review_id = models.CharField(max_length=50)
@@ -65,23 +66,35 @@ class Review(models.Model):
         return self.complete_text
 
 
+class Topic(models.Model):
+    topic = models.CharField(max_length=50)
+    description = models.CharField(max_length=240)
+
+
+    def __str__(self):
+        return self.topic
+
+
+class ItemTopic(models.Model):
+    noun = models.CharField(max_length=50)
+    topic = models.ForeignKey('Topic', on_delete=models.CASCADE, related_name='itemtopics')
+    categories = models.ManyToManyField('CategoryBusiness')
+
+
+    def __str__(self):
+        return self.noun
+
+
 class Opinion(models.Model):
     text_pt = models.CharField(max_length=500)
     text_en = models.CharField(max_length=500)
     polarity = models.IntegerField()
     review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='opinions')
+    topics = models.ManyToManyField('Topic', blank=True)
 
     def __str__(self):
         return self.text_pt
 
-
-class Topic(models.Model):
-    topic = models.CharField(max_length=240)
-    opinion = models.ForeignKey('Opinion', on_delete=models.CASCADE, related_name='topics')
-    relations_topics = models.ManyToManyField('self')
-
-    def __str__(self):
-        return self.topic
 
 
 class BusinessPlan(models.Model):
