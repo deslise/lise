@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <section class="content" id="sem-margem">
+        <div class="container-fluid ">
+            <div class="row clearfix" style="">
+                <div class="col-lg-8 col-md-8 col-md-push-2 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>MINHA CONTA</h2>
+                        </div>
+                        <div class="body">
+
+                            <h2 class="card-inside-title" style=" font-size: 20px;">
+                                Dados Cadastrais
+
+                                <a href="#" data-toggle="modal" data-target="#editAccount" style='float: right;'>
+                                    <i class="material-icons" style="color: #607D8B;">edit</i>
+                                </a>
+                            </h2>
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Nome</b>
+                                    </p>
+                                    <p>{{ profile.user.first_name }}</p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Telefone</b>
+                                    </p>
+                                    <p>{{ profile.phone }}</p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Email</b>
+                                    </p>
+                                    <p>{{ profile.user.email }}</p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Senha</b>
+                                    </p>
+                                    <p>******</p>
+                                     <a href="{% url 'liseapp:change-password' %}" type='button'> Mude sua senha por  aqui</a>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Form Example With Validation -->
+        </div>
+        <!-- Modal -->
+        <div id="editAccount" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar meus dados cadastrais</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row clearfix">
+                            <form action="{% url 'liseapp:my-account-details' %}" method="POST">
+
+                                {% csrf_token %}
+                                {% for error in form1.non_field_errors %}
+                                    <p style="color: red"><b>{{ error }}</b></p>
+                                {% endfor %}
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Nome</b>
+                                    </p>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name='first_name' class="form-control" value="{{ profile.user.first_name }}" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Telefone</b>
+                                    </p>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name='phone' class="form-control" value="{{ profile.phone }}" required/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="modal-footer link">
+                                        <a type="button" class="btn btn-large bg-blue-grey waves-effect" data-dismiss="modal">Cancelar</a>
+                                        <button type="submit" name='edit_dados' class="btn btn-large bg-blue-grey waves-effect" >Salvar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+{% endblock %}

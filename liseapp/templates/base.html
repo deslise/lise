@@ -1,0 +1,147 @@
+{% load staticfiles %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Lise</title>
+    <!-- Favicon-->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri|Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="{% static 'plugins/node-waves/waves.css' %}" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="{% static 'plugins/morrisjs/morris.css' %}" rel="stylesheet" />
+
+    <!-- Sweetalert Css -->
+    <link href="{% static 'plugins/sweetalert/sweetalert.css' %}" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="{% static 'css/themes/all-themes.css' %}" rel="stylesheet" />
+
+    {% block link %}
+    {% endblock %}
+
+</head>
+
+<body class="theme-cyan">
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a class="navbar-brand" id='logo' href="index.html">Lise</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'liseapp:index' %}">
+                            <i class="material-icons">layers</i>
+                        </a>
+                    </li>
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            {% if noti_no_viewed %}
+                            <span class="label-count">{{ noti_no_viewed.count }}</span>
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICAÇÕES</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    {% for notification in notifications %}
+                                    <li>
+                                        <a href="{{ notification.get_href }}">
+                                            <div class="menu-info">
+                                                <h4>{{ notification.title }}</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> {{ notification.days_ago_created }}
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="{% url 'liseapp:notifications' %}">Visualizar todas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+
+                    <!-- Tasks -->
+                    <!-- #END# Tasks -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle clearfix" data-toggle="dropdown" role="button">
+                            <i class="material-icons">person</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="{% url 'liseapp:my-account-details' %}"><i class="material-icons">account_box</i>Minha Conta</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="{% url 'liseapp:logout' %}"><i class="material-icons">input</i>Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+
+    {% block body %}
+    {% endblock %}
+
+    <!-- Jquery Core Js -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
+
+    <!-- SweetAlert Plugin Js -->
+    <script src="{% static 'plugins/sweetalert/sweetalert.min.js' %}"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
+
+    <!-- Custom Js -->
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/pages/ui/dialogs.js' %}"></script>
+
+
+    <!-- Demo Js -->
+    <script src="{% static 'js/demo.js' %}"></script>
+
+
+    {% block js %}
+    {% endblock %}
+
+</body>
+
+</html>

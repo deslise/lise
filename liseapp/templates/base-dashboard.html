@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+    <section id="sectionsidebar" data-item="{{ item }}" data-subitem="{{ subitem }}">
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" >
+            <div class="menu">
+                <ul class="list">
+                    <li class="header bg-blue-grey">MODO DE VISUALIZAÇÃO</li>
+                    <li id='all'>
+                        <a href="{% url 'liseapp:dashboard-details' plan.id %}">
+                            <i class="material-icons">border_all</i>
+                            <span>Todos</span>
+                        </a>
+                    </li>
+                    <li id="topics">
+                        <a href="#" class="menu-toggle">
+                            <i class="material-icons">storage</i>
+                            <span>Tópicos</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="toptopics">
+                                <a href="{% url 'liseapp:top-topics' plan.id %}" >
+                                    <span>Principais Tópicos</span>
+                                </a>
+                            </li>
+                            <li id="polaritytopics">
+                                <a href="{% url 'liseapp:polarity-topics' plan.id %}">
+                                    <span>Polaridade dos Tópicos</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="operating">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">schedule</i>
+                            <span>Funcionamento</span>
+                        </a>
+                        <ul class="ml-menu active">
+                            <li id="operatingdays">
+                                <a href="{% url 'liseapp:operating-days' plan.id %}">
+                                    <span>Dias de Funcionamento</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="maps">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">map</i>
+                            <span>Mapas</span>
+                        </a>
+                        <ul class="ml-menu active">
+                            <li id="competitionregions">
+                                <a href="{% url 'liseapp:competition-regions' plan.id %}">
+                                    <span>Regiões de Concorrencia</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2017 <a href="javascript:void(0);"> Nayara Silva - IFPI</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.0
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+         <!--#END# Left Sidebar-->
+    </section>
+
+    {% block dashboard %}
+
+    {% endblock %}
+
+{% endblock %}

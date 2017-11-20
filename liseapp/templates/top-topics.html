@@ -1,0 +1,107 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>PRINCIPAIS TÓPICOS</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    Tópicos
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    Os tópicos são assuntos da concorrencia que os clientes estão comentando.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    Porcentagem
+                                </div>
+                                <div class="body bg-blue-grey">
+                                   Essa porcentagem se trata da quantidade de comentarios sobre o tópico, seja ruins ou bons.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                PRINCIPAIS TÓPICOS
+                                <small>Esse são os tópicos mais comentados pelos clientes.</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                        <!-- morris -->
+                            <div id="donut_chart_all" style="height: 400px;" data-topics="{{ nouns }}" data-counts="{{ counts }}" class="dashboard-donut-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                LISTA DE TÓPICOS
+                                <small>Entenda o significado de cada tópico sobre concorrencia.</small>
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tópico</th>
+                                        <th>Descrição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for topic in topics %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ topic.topic }}</td>
+                                        <td>{{ topic.description }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+     <!-- Jquery CountTo Plugin Js -->
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+
+    <!-- ChartJs -->
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <!-- CHART LOADER -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <script src="{% static 'js/pages/top-topics.js' %}"></script>
+
+{% endblock %}

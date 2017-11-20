@@ -1,0 +1,53 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>REGIÕES DE CONCORRÊNCIA</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    Localidade
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    Conhecer onde ficam seus concorrentes mais relevantes é muito importante na hora do planejamento de negócio. A localidade também pode ser um requisito para seus clientes.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card" id="cardRegioesDeConcorrencia">
+                        <div class="header">
+                            <h2>
+                                LOCALIDADE DOS CONCORRENTES
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div id="map" data-lngs='{{ lngs }}' data-lats="{{ lats }}" class="gmap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="https://maps.google.com/maps/api/js?v=3&libraries=visualization&key=AIzaSyAEftqbUOFOBpnJf5XMBUWX1en7Wck_OOQ"></script>
+
+    <script src="{% static 'js/pages/competition-regions.js' %}"></script>
+
+
+{% endblock %}

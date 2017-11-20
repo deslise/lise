@@ -1,0 +1,179 @@
+
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>{{ plan.category.specialty.upper }} EM {{ plan.location.upper }}</h2>
+            </div>
+
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">location_on</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">CONCORRENTES</div>
+                            <div class="number count-to" data-from="0" data-to="{{ rivals.count }}" data-speed="1000" data-fresh-interval="15"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">forum</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">AVALIAÇÕES</div>
+                            <div class="number count-to" data-from="0" data-to="{{ reviews.count }}" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">playlist_add_check</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">TÓPICOS</div>
+                            <div class="number count-to" data-from="0" data-to="{{ nouns|length }}" data-speed="1000" data-fresh-interval="5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>POLARIDADE DOS TÓPICOS</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:polarity-topics' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <canvas id="bar_chart" data-pos="{{ count_pos }}" data-neg="{{ count_neg }}" data-neu="{{ count_neu }}"
+                            data-count="{{ topics_count }}" data-topics="{{ nouns }}"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card" id="cardPrincipaisTópicos">
+                        <div class="header">
+                            <h2>PRINCIPAIS TÓPICOS</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:top-topics' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="donut_chart" data-topics="{{ nouns }}" data-counts="{{ topics_count }}" class="dashboard-donut-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card" id="cardDiasDeFuncionamento">
+                        <div class="header">
+                            <h2>DIAS DE FUNCIONAMENTO</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:operating-days' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <ul class="dashboard-stat-list">
+                                {% for key, value in week_count %}
+                                    <li>
+                                        {{ key }}
+                                        <span class="pull-right"><b>{{ value }}%</b> <small> DOS CONCORRENTES</small></span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card" id="cardRegioesDeConcorrencia">
+                        <div class="header">
+                            <h2>
+                                REGIÕES DE CONCORRÊNCIA
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:competition-regions' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="map" data-lngs='{{ lngs }}' data-lats="{{ lats }}" class="gmap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block js %}
+
+     <!-- Jquery CountTo Plugin Js -->
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+
+    <!-- ChartJs -->
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <!-- Google Maps API Js -->
+    <!--<script src="https://maps.google.com/maps/api/js?v=3&sensor=false&key=AIzaSyAEftqbUOFOBpnJf5XMBUWX1en7Wck_OOQ"></script>-->
+    <script src="https://maps.google.com/maps/api/js?v=3&libraries=visualization&key=AIzaSyAEftqbUOFOBpnJf5XMBUWX1en7Wck_OOQ"></script>
+
+    <!-- GMaps PLugin Js -->
+    <script src="{% static 'plugins/gmaps/gmaps.js' %}"></script>
+
+    <!-- CHART LOADER -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
+
+    <!-- Jquery Knob Plugin Js -->
+    <script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+
+    <!-- Custom Js -->
+    <script src="{% static 'js/pages/charts/jquery-knob.js' %}"></script>
+    <script src="{% static 'js/pages/charts/chartjs.js' %}"></script>
+    <script src="{% static 'js/pages/index.js' %}"></script>
+
+    <script src="{% static 'js/pages/maps/google.js' %}"></script>
+
+    <script src="{% static 'js/pages/competition-regions.js' %}"></script>
+
+
+{% endblock %}

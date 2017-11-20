@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+
+{% block link %}
+
+
+    <link href="{% static 'plugins/bootstrap-select/css/bootstrap-select.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="content" id="sem-margem">
+        <div class="container-fluid ">
+            <div class="row clearfix" style="">
+                <div class="col-lg-8 col-md-8 col-md-push-2 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>CADASTRO DE PLANO DE NEGÓCIO</h2>
+                        </div>
+                        <div class="body">
+                            <div class="alert alert-warning">
+                                <strong>Importante!</strong> Depois de cadastrar o plano, só será possivel editar a descrição.
+                            </div>
+                            <form method="post" action="{% url 'liseapp:register-plan' %}">
+
+                                {% csrf_token %}
+                                {% for error in form1.non_field_errors %}
+                                    <p style="color: red"><b>{{ error }}</b></p>
+                                {% endfor %}
+
+                                <h2 class="card-inside-title" style=" font-size: 20px;">
+                                    Categoria do Negócio
+                                    <small style="font-size: 15px;">Do que se trata seu negócio? O Lise já está preparado para analisar concorrentes de várias categorias, se não houver a categória do seu negócio, faça uma solicitação. Nós iremos avaliar sua solicitação e em breve retornaremos com a resposta.</small>
+                                </h2>
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <p>
+                                            <b>Ramo</b>
+                                        </p>
+                                        <select id='branch' name='branch' class="form-control show-tick" value="0" onchange="onchangeBranch();" required>
+                                            <option value=0 specialties=0 >Selecione um ramo empresarial</option>
+                                            {% for branch, list in categories %}
+                                            <option value="{{ branch }}"  specialties="{{ list }}">{{ branch }}</option>
+                                            {% endfor %}
+                                        </select>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <p>
+                                            <b>Especialidade</b>
+                                        </p>
+
+                                        <select id='category' name="specialty" disabled class="form-control show-tick" required>
+                                            <option>Selecione uma categoria</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <b>Não tem categória para sua ideia?</b>
+                                        <a href='javascritp:void(0);' type='button' data-toggle="modal" data-target="#myModal"> Solicite uma categoria.</a>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <h2 class="card-inside-title" style="font-size: 20px;">
+                                    Localidade
+                                    <small style="font-size: 15px;">Onde você pretente instalar seu negócio? Ou onde ela já está instalada? Essa informação é importante para empresas locais, pois a análise deve encontrar concorrentes da região que o negócio irá ficar.</small>
+                                </h2>
+                                <div class="row clearfix">
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <p>
+                                            <b>Estado</b>
+                                        </p>
+                                        <select id="estado" name='state' class="form-control" value="" required></select>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <p>
+                                            <b>Cidade</b>
+                                        </p>
+
+                                        <select id="cidade" name='city' class="form-control" disabled value="" required>
+                                            <option>Selecione uma cidade</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <h2 class="card-inside-title" style=" font-size: 20px;">
+                                    Descrição
+                                </h2>
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-line">
+                                            <textarea rows="2" cols="" name='description' class="form-control no-resize auto-growth" placeholder="Descreva um pouco sobre o negócio que você planeja. :)" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="clearfix js-sweetalert" >
+                                    <div style="float: right;">
+                                        <button type="button" class="btn bg-blue-grey waves-effect" style="font-size: 15px;" onclick="cancelarCadastro();">
+                                            Cancelar
+                                        </button>
+                                        <button type="summit" name='form_register_plan' class="btn bg-blue-grey waves-effect" style="font-size: 15px;">
+                                            Cadastrar
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- </form> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Advanced Form Example With Validation -->
+        </div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Solicitação de Categória</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row clearfix">
+                            <form id="form_validation" name="solicat" action="{% url 'liseapp:register-plan' %}" method="POST">
+
+                                {% csrf_token %}
+                                {% for error in form2.non_field_errors %}
+                                    <p style="color: red"><b>{{ error }}</b></p>
+                                {% endfor %}
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Ramo</b>
+                                    </p>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name='branch' class="form-control" placeholder="Ex: Alimentício" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Especialidade</b>
+                                    </p>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name='specialty' class="form-control" placeholder="Ex: Pizzaria" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <p>
+                                        <b>Descrição</b>
+                                    </p>
+                                    <div class="form-line">
+                                        <textarea rows="2" name="description" class="form-control no-resize auto-growth" placeholder="Descreva sobre do que se trata a categoria desejada." required></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="modal-footer link">
+                                        <a type="button" class="btn btn-large bg-blue-grey waves-effect" data-dismiss="modal">Cancelar</a>
+                                        <button type="submit" name="form_request_category" class="btn btn-large bg-blue-grey waves-effect" >Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+    <!--<script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>-->
+    <script src="{% static 'plugins/bootstrap-notify/bootstrap-notify.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
+    <script src="{% static 'plugins/jquery-steps/jquery.steps.js' %}"></script>
+    <script src="{% static 'js/pages/forms/form-validation.js' %}"></script>
+    <script src="{% static 'js/pages/forms/basic-form-elements.js' %}"></script>
+    <script src="{% static 'js/pages/forms/advanced-form-elements.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+    <script src="{% static 'js/pages/register-plan.js' %}"></script>
+
+
+{% endblock %}

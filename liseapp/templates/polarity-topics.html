@@ -1,0 +1,62 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>PRINCIPAIS TÓPICOS</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            Tópicos
+                        </div>
+                        <div class="body bg-blue-grey">
+                            Os tópicos são assuntos da concorrencia que os clientes estão comentando. Veja mais detalhes em <a style="color: #fff;" href="principais-topicos.html">Principais Tópicos</a>.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            Possitivo ou Negativo
+                        </div>
+                        <div class="body bg-blue-grey">
+                           Essa polaridade destaca os pontos fortes e fracos dos concorrentes em relação às avaliações dos clientes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>POLARIDADE DOS TÓPICOS</h2>
+                        </div>
+                        <div class="body">
+                            <canvas id="bar_chart_all" data-pos="{{ count_pos }}" data-neg="{{ count_neg }}" data-neu="{{ count_neu }}"
+                            data-count="{{ topics_count }}" data-topics="{{ nouns }}"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <script src="{% static 'js/pages/polarity-topics.js' %}"></script>
+
+{% endblock %}

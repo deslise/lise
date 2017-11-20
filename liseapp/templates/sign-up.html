@@ -1,0 +1,91 @@
+{% extends 'base-sign.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<body class="signup-page">
+    <div class="signup-box">
+        <div class="logo">
+            <a href="javascript:void(0);" id="logo">Lise</a>
+            <small>Análise de Concorrentes Automatizado</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form action="{% url 'liseapp:signup' %}" id="sign_up" method="POST">
+                    {% csrf_token %}
+                    <div class="demo-masked-input">
+                        <div class="msg">Registre uma nova associação</div>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                            <p style="color: red"><b>{{ error }}</b></p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p style="color: red"><b>{{ error }}</b></p>
+                        {% endfor %}
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control" name="first_name" placeholder="Nome" value="{{ form.username.value|default:'' }}" required autofocus>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="email" class="form-control" name="email" value="{{ form.email.value|default:'' }}" placeholder="Endereço de Email" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">phone_iphone</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="phone" pattern="\(\d{2}\)\s\d{5}\-\d{4}" value="{{ form.phone.value|default:'' }}"  class="form-control mobile-phone-number" placeholder="Ex: (00) 00000-0000">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="password" class="form-control" name="password1" minlength="6" placeholder="Senha" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="password" class="form-control" name="password2" minlength="6" placeholder="Confirme a Senha" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="terms" id="terms">
+                            <label for="terms">Eu leio e concordo com os <a href="javascript:void(0);">termos de uso</a>.</label>
+                        </div>
+
+                        <button class="btn btn-block btn-lg bg-blue-grey waves-effect" type="submit">INSCREVER-SE</button>
+
+                        <div class="m-t-25 m-b--5 align-center">
+                            <a href="{% url 'liseapp:signin' %}">Você já é membro?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'js/pages/examples/sign-up.js' %}"></script>
+    <script src="{% static 'js/pages/forms/advanced-form-elements.js' %}"></script>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -17,6 +18,17 @@ class Branch(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class RequestCategory(models.Model):
+    specialty = models.CharField(max_length=240)
+    branch = models.CharField(max_length=240)
+    description = models.TextField()
+    accept = models.BooleanField(default=True)
+
+
+    def __str__(self):
+        return self.specialty + ' - ' + self.branch
 
 
 
@@ -96,13 +108,21 @@ class Opinion(models.Model):
         return self.text_pt
 
 
-
 class BusinessPlan(models.Model):
 
+    STATUS = (('solicitada','Solicitada'),('ativa','Ativa'),('cancelada','Cancelada'))
     description = models.CharField(max_length=240)
-    location = models.CharField(max_length=100)
-    enterprising = models.OneToOneField('Enterprising', on_delete=models.CASCADE)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    enterprising = models.ForeignKey('Enterprising', on_delete=models.CASCADE)
     create_date = models.DateField()
+    status = models.CharField(max_length=15, choices=STATUS, default='solicitada')
+
+    def ageDays(self):
+        return (date.today() - self.create_date).days
+
+    def location(self):
+        return '%s, %s' % (self.city, self.state)
 
     class Meta:
         abstract = True

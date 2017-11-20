@@ -1,0 +1,71 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DIAS DE FUNCIONAMENTO</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    DIAS ABERTOS
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    A quantidade de concorrentes abertos por dias da semana para analisar o funcionamento dessa área de mercado em Teresina-PI.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="card" id="cardDiasDeFuncionamento">
+                        <div class="header">
+                            <h2>DIAS DE FUNCIONAMENTO</h2>
+                        </div>
+                        <div class="body">
+                            <ul class="dashboard-stat-list">
+                                {% for key, value in week_count %}
+                                    <li>
+                                        {{ key }}
+                                        <span class="pull-right"><b>{{ value }}%</b> <small> DOS CONCORRENTES</small></span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Line Chart -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>FUNCIONAMENTO DOS CONCORRENTES POR DIA DA SEMANA</h2>
+                        </div>
+                        <div class="body">
+                            <canvas id="line_chart" data-counts="{{ counts }}" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <script src="{% static 'js/pages/operating-days.js' %}"></script>
+
+{% endblock %}

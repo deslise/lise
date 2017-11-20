@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <section class="content" id="sem-margem">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-8 col-lg-push-2 col-md-8 col-md-push-2 col-sm-12 col-xs-12">
+                    <div class="row clearfix block-header" >
+                        <div class="col-lg-9 col-md-8 col-sm-10 col-xs-10">
+                            <h2>PLANOS DE NEGÓCIOS</h2>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        {% for plan in plans %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header bg-blue-grey">
+                                    <h2>
+                                        {{ plan.category.specialty }}<br><small><em>{{ plan.location }}</em></small>
+                                        <small>{{ plan.ageDays }} dias de análise</small>
+                                    </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <li>
+                                            <button  onclick="window.location = '{% url 'liseapp:dashboard-details' plan.id %}';" type="button" class="btn bg-blue-grey waves-effect">
+                                                <i class="material-icons">timeline</i>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" onclick="deletarPlano({{ plan.id }});" class="btn bg-blue-grey waves-effect">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="body">
+                                    <div class="link-blue-grey" style="float: right; ">
+                                        <a class="dropdown-toggle" type="button" data-toggle="modal" data-target="#editDecription">
+                                            <i class="material-icons" style="color:#607D8B;">edit</i>
+                                        </a>
+                                    </div>
+                                    {{ plan.description }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="editDecription" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Descrição do plano</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row clearfix">
+                                            <form action="{% url 'liseapp:index' %}" method="POST">
+
+                                                {% csrf_token %}
+                                                {% for error in form2.non_field_errors %}
+                                                    <p style="color: red"><b>{{ error }}</b></p>
+                                                {% endfor %}
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <p>
+                                                        <b>Descrição</b>
+                                                    </p>
+                                                    <div class="form-line">
+                                                        <textarea rows="2" name="description" class="form-control no-resize auto-growth" placeholder="Descreva sobre do que se trata a categoria desejada." required>{{ plan.description }}</textarea>
+                                                    </div>
+                                                    <input name="id" type="hidden" value="{{ plan.id }}">
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="modal-footer link">
+                                                        <a type="button" class="btn btn-large bg-blue-grey waves-effect" data-dismiss="modal">Cancelar</a>
+                                                        <button type="submit"  class="btn btn-large bg-blue-grey waves-effect" >Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer link" style="float: right;">
+                        <a type="button" class="btn bg-blue-grey waves-effect" href="{% url 'liseapp:register-plan' %}"><b>ADICIONAR</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
