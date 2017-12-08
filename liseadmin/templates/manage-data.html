@@ -1,0 +1,45 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h2>Gerenciamento de Dados</h2>
+<div class="loader center" >
+    <img id="loading" src="{% static 'images/loading.gif' %}">
+</div>
+<div id="content_update">
+    <button type="submit" onclick="updateData();" class="button font-large center" title="Executar ação selecionada" >Atualizar</button>
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <div class="dashboard-item-header">
+                <span class="dashboard-item-header-title">Atualizações de dados</span>
+            </div>
+            <div class="dashboard-item-content">
+                <table class="table-large">
+                    <tr>
+                        <th>Numero</th>
+                        <th>Tempo inicial</th>
+                        <th>Tempo final</th>
+                        <th>Duração (s)</th>
+                        <th>Planos</th>
+                    </tr>
+                    {% for up in updates %}
+                    <tr>
+                        <td>{{ up.numero }}</td>
+                        <td>{{ up.datetime_start }}</td>
+                        <td>{{ up.datetime_end }}</td>
+                        <td>{{ up.timeInSeconds }}</td>
+                        <td>{{ up.plans.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%}
+    <script src="{% static 'js/functions-admin.js' %}"></script>
+
+{% endblock %}

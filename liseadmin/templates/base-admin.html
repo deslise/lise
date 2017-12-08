@@ -1,0 +1,23 @@
+{% extends 'admin/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Lise Admin{% endblock %}
+
+{% block extrastyle %}
+<!-- Favicon-->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Bootstrap Core Css -->
+    <link href="{% static 'css/style-admin.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    {% block js %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h1>Solicitações de categoria</h1>
+<div class="dashboard">
+    <div class="dashboard-item">
+        <div class="dashboard-item-header">
+            <span class="dashboard-item-header-title">Solicitações Pendentes</span>
+        </div>
+        <div class="dashboard-item-content">
+            {% if requests %}
+            <table class="table-large">
+                <tr>
+                    <th>Ramo</th>
+                    <th>Especialidade</th>
+                    <th>Descrição</th>
+                    <th>Data de Solicitação</th>
+                    <th>Empreendedor</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.branch }}</td>
+                    <td>{{ req.specialty }}</td>
+                    <td>{{ req.description }}</td>
+                    <td>{{ req.date_request }}</td>
+                    <td><a href="{{ req.enterprising.get_admin_url }}">{{ req.enterprising }}</a></td>
+                    <td><a href="{% url 'liseadmin:state-request' req.id 'aceito' %}"><img src="{% static 'admin/img/icon-yes.svg' %}"></a></td>
+                    <td><a href="{% url 'liseadmin:state-request' req.id 'recusado' %}"><img src="{% static 'admin/img/icon-no.svg' %}"></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <ul>
+                <li><span colspan="4">Nenhuma solicitação</span></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="dashboard-item">
+
+        <div class="dashboard-item-header">
+            <span class="dashboard-item-header-title">Historico de solicitações</span>
+        </div>
+        <div class="dashboard-item-content">
+            {% if historic %}
+            <table class="table-large">
+                <tr>
+                    <th>Ramo</th>
+                    <th>Especialidade</th>
+                    <th>Descrição</th>
+                    <th>Data de Solicitação</th>
+                    <th>Empreendedor</th>
+                    <th>Resposta</th>
+                    <th></th>
+                </tr>
+                {% for item in historic %}
+                <tr>
+                    <td>{{ item.branch }}</td>
+                    <td>{{ item.specialty }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.date_request }}</td>
+                    <td><a href="{{ item.enterprising.get_admin_url }}">{{ item.enterprising }}</a></td>
+                    <td>{{ item.get_status_display }}</td>
+                    <td><a href="{{ item.get_admin_url }}"><span class="icon-edit"></span></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <ul>
+                <li><span colspan="4">Nenhum histórico</span></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

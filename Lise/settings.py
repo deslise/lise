@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.utils.translation import ugettext_lazy as _
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'managedata',
     'liseapp',
     'django_q',
+    'liseadmin',
 ]
 
 
@@ -83,6 +88,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'Lise.wsgi.application'
 
@@ -142,10 +149,58 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'liseapp:index'
 
 AUTHENTICATION_BACKENDS = ('liseapp.models.EmailBackend',)
+
+
+# CONFIG JET
+JET_DEFAULT_THEME = 'default'
+#
+
+JET_SIDE_MENU_COMPACT = True
+JET_CHANGE_FORM_SIBLING_LINKS = True
+JET_INDEX_DASHBOARD = 'liseadmin.dashboard.CustomIndexDashboard'
+# JET_APP_INDEX_DASHBOARD  =  'jet.dashboard.dashboard.DefaultAppIndexDashboard'
+JET_SIDE_MENU_ITEMS = [
+
+    {'label': _('Controle'), 'items': [
+        {'label': _('Solicitações de Categoria'), 'url': '/admin/request_categories/'},
+        {'label': _('Categoria'), 'url': '/admin/manage_categories/'},
+        {'label': _('Planos de Negócios'), 'url': '/admin/manage_plan/'},
+        {'label': _('Tópicos'), 'url': '/admin/manage_topics/'},
+    ]},
+    {'label': _('Gerencimento de dados'), 'items': [
+        {'label': _('Atualização'), 'url': '/admin/manage_data/'},
+        {'label': _('Items dos Tópicos'), 'url': '/admin/new_items/'},
+    ]},
+    {'label': _('Usuários'), 'items': [
+        {'name': 'auth.user'},
+        {'name': 'auth.group'}
+    ]},
+    {'label': _('Modelos'), 'items': [
+        {'name': 'managedata.branch'},
+        {'name': 'managedata.business'},
+        {'name': 'managedata.categorybusiness'},
+        {'name': 'managedata.businessplan'},
+        {'name': 'managedata.enterprising'},
+        {'name': 'managedata.itemtopic'},
+        {'name': 'managedata.keyword'},
+        {'name': 'managedata.opinion'},
+        {'name': 'managedata.requestcategory'},
+        {'name': 'managedata.review'},
+        {'name': 'managedata.topic'},
+        {'name': 'managedata.weekday'},
+        {'name': 'liseapp.notification'},
+
+    ]},
+]
+
+
+
 
 

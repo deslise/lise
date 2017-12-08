@@ -1,0 +1,22 @@
+﻿
+
+table.table-large tr th,
+table.table-large tr td,
+.font-large,
+.font-large:hover{
+    font-size:15px;
+}
+.center{
+    align:center;
+}
+
+.loader img{
+    position:relative;
+    display:none;
+    max-width:15%;
+    max-height:15%;
+    width: auto;
+    height: auto;
+    top:100px;
+    left:43%;
+}

@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification
-from managedata.models import Enterprising, EarlyBusinessPlan, Business, Review, Opinion, Topic, Branch, \
+from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness
 
 
@@ -27,11 +27,11 @@ def dict_base(request):
 
 def index(request):
     profile = profileLoggedIn(request)
-    plans = EarlyBusinessPlan.objects.filter(enterprising=profile, status='ativa')
+    plans = BusinessPlan.objects.filter(enterprising=profile, status='ativo')
     if request.method == 'POST':
         form = EditDescriptionPlan(request.POST)
         if form.is_valid():
-            plan = EarlyBusinessPlan.objects.get(id=form.cleaned_data.get('id'))
+            plan = BusinessPlan.objects.get(id=form.cleaned_data.get('id'))
             plan.description = form.cleaned_data.get('description')
             plan.save(force_update=True)
             return redirect('liseapp:index')
@@ -81,7 +81,7 @@ def forgotPassword(request):
 
 
 def dashboardDetails(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     rivals = Business.objects.filter(category=plan.category)
     reviews = Review.objects.filter(business__category=plan.category)
     topics = list_details_topics(category=plan.category)
@@ -101,7 +101,7 @@ def dashboardDetails(request, plan_id):
 
 
 def topTopics(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     topics = Topic.objects.filter(opinion__review__business__category=plan.category).distinct()
     topics_list = list_details_topics(category=plan.category)
     counts = list(map(lambda x: x['count'], topics_list))
@@ -112,7 +112,7 @@ def topTopics(request, plan_id):
 
 
 def polarityTopics(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     topics = list_details_topics(category=plan.category)
     counts = list(map(lambda x: x['count'], topics))
     pos = list(map(lambda x: x['count_pos'], topics))
@@ -125,7 +125,7 @@ def polarityTopics(request, plan_id):
     return render(request, 'polarity-topics.html', vals)
 
 def operatingDays(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     week_count = list_weekdays(category=plan.category)
     counts = list(map(lambda x: x[1], list_weekdays(category=plan.category)))
     vals = dict(dict_base(request), **{'plan':plan,
@@ -133,7 +133,7 @@ def operatingDays(request, plan_id):
     return render(request, 'operating-days.html', vals)
 
 def competitionRegions(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     lng_lat = list_locations(category=plan.category)
     lng = list(map(lambda l: l[0], lng_lat))
     lat = list(map(lambda l: l[1], lng_lat))
@@ -144,8 +144,8 @@ def competitionRegions(request, plan_id):
 
 def registerPlan(request):
     enterprising = profileLoggedIn(request)
-    branchs = CategoryBusiness.objects.filter(active=True).values_list('branch__name', flat=True).distinct()
-    categories = [(branch, list(CategoryBusiness.objects.filter(active=True, branch__name=branch)
+    branchs = sorted(CategoryBusiness.objects.filter(active=True).values_list('branch__name', flat=True).distinct())
+    categories = [(branch, sorted(CategoryBusiness.objects.filter(active=True, branch__name=branch)
                                 .values_list('specialty', flat=True))) for branch in branchs]
 
     if 'form_register_plan' in request.POST:
@@ -154,7 +154,7 @@ def registerPlan(request):
             data = form1.cleaned_data
             branch = Branch.objects.get_or_create(name=data.get('branch'))[0]
             category = CategoryBusiness.objects.get(branch=branch, specialty=data.get('specialty'))
-            plan = EarlyBusinessPlan.objects.create(description=data.get('description'),
+            plan = BusinessPlan.objects.create(description=data.get('description'),
                                                     state=data.get('state'),
                                                     city=data.get('city'),
                                                     enterprising=enterprising,
@@ -168,6 +168,8 @@ def registerPlan(request):
         form2 = RequestCategoryForm(request.POST)
         if form2.is_valid():
             form2.save()
+            form2.date_request = date.today()
+            form2.save(force_update=True)
             return redirect('liseapp:index')
         print(form2.errors)
     else:
@@ -179,14 +181,14 @@ def registerPlan(request):
 
 
 def deletePlan(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     plan.status='cancelada'
     plan.save(force_update='True')
     return redirect('liseapp:index')
 
 
 def editPlan(request, plan_id):
-    plan = EarlyBusinessPlan.objects.get(id=plan_id)
+    plan = BusinessPlan.objects.get(id=plan_id)
     branchs = CategoryBusiness.objects.filter(active=True).values_list('branch__name', flat=True).distinct()
     categories = [(branch, list(CategoryBusiness.objects.filter(active=True, branch__name=branch)
                                 .values_list('specialty', flat=True))) for branch in branchs]

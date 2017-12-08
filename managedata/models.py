@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Enterprising(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20)
@@ -12,41 +13,81 @@ class Enterprising(models.Model):
         return self.user.first_name
 
 
+    def get_admin_url(self):
+        return '/admin/managedata/enterprising/'+str(self.id)
+
+
 
 class Branch(models.Model):
-    name = models.CharField(max_length=240)
+    name = models.CharField(max_length=240, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class RequestCategory(models.Model):
+    STATUS = (('pendente','Pendente'),
+              ('aceito','Aceito'),
+              ('recusado','Recusado'))
     specialty = models.CharField(max_length=240)
     branch = models.CharField(max_length=240)
     description = models.TextField()
-    accept = models.BooleanField(default=True)
+    status = models.CharField(max_length=8, choices=STATUS, default='pendente')
+    date_request = models.DateField()
+    enterprising = models.ForeignKey('Enterprising', on_delete=models.CASCADE, related_name='requests')
+
 
 
     def __str__(self):
         return self.specialty + ' - ' + self.branch
 
+    def set_status(self, choice):
+        self.status = choice
+        self.save(force_update=True)
+
+    def get_admin_url(self):
+        return '/admin/managedata/requestcategory/' + str(self.id)
+
 
 
 class CategoryBusiness(models.Model):
-    specialty = models.CharField(max_length=240)
-    branch = models.ForeignKey('Branch', related_name='categories')
+    specialty = models.CharField(max_length=240, unique=True)
+    branch = models.ManyToManyField('Branch')
     active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.specialty
 
 
+    def list_branchs(self):
+        l = sorted(self.branch.all().values_list('name', flat=True))
+        return ', '.join(l)
+
+    def quantBusiness(self):
+        return len(BusinessPlan.objects.filter(category=self))
+
+
+    def get_admin_url(self):
+        return '/admin/managedata/categorybusiness/' + str(self.id)
+
+    def list_keywords(self):
+        return Keyword.objects.filter(category=self)
+
+
+
 class Keyword(models.Model):
-    keyword = models.CharField(max_length=50)
+    keyword = models.CharField(max_length=50, unique=True)
     category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='keywords')
+
+
+    class Meta:
+        ordering = ['keyword']
 
     def __str__(self):
         return self.keyword
+
+    def get_admin_url(self):
+        return '/admin/managedata/keyword/'+str(self.id)
 
 
 class Business(models.Model):
@@ -87,19 +128,39 @@ class Topic(models.Model):
         return self.topic
 
 
-class ItemTopic(models.Model):
-    noun = models.CharField(max_length=50)
-    topic = models.ForeignKey('Topic', on_delete=models.CASCADE, related_name='itemtopics')
-    categories = models.ManyToManyField('CategoryBusiness')
+    def numberItems(self):
+        return ItemTopic.objects.filter(topic=self).count()
 
+
+    def numberCategories(self):
+        return ItemTopic.objects.filter(topic=self).values('categories').distinct().count()
+
+
+
+class ItemTopic(models.Model):
+    STATUS = (('novo', 'Novo'),('ativo','Ativo'),('recusado','Recusado'))
+    noun = models.CharField(max_length=50)
+    topic = models.ForeignKey('Topic', on_delete=models.CASCADE, related_name='itemtopics', null=True)
+    status = models.CharField(max_length=20, choices=STATUS, default='novo')
+    categories = models.ManyToManyField('CategoryBusiness')
+    context = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.noun
+
+    def save(self, *args, **kwargs):
+        super(ItemTopic, self).save(*args, **kwargs)
+        if self.status == 'ativo': identify_all_opinion_by_noun(self.noun, self.topic)
+        return self
+
+    def get_admin_url(self):
+        return '/admin/managedata/itemtopic/'+str(self.id)
 
 
 class Opinion(models.Model):
     text_pt = models.CharField(max_length=500)
     text_en = models.CharField(max_length=500)
+    lemmatized = models.CharField(max_length=500)
     polarity = models.IntegerField()
     review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='opinions')
     topics = models.ManyToManyField('Topic', blank=True)
@@ -110,13 +171,14 @@ class Opinion(models.Model):
 
 class BusinessPlan(models.Model):
 
-    STATUS = (('solicitada','Solicitada'),('ativa','Ativa'),('cancelada','Cancelada'))
+    STATUS = (('solicitado','Solicitado'),('ativo','Ativo'),('cancelado','Cancelado'))
     description = models.CharField(max_length=240)
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     enterprising = models.ForeignKey('Enterprising', on_delete=models.CASCADE)
     create_date = models.DateField()
-    status = models.CharField(max_length=15, choices=STATUS, default='solicitada')
+    status = models.CharField(max_length=15, choices=STATUS, default='solicitado')
+    category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='business_plans')
 
     def ageDays(self):
         return (date.today() - self.create_date).days
@@ -124,24 +186,29 @@ class BusinessPlan(models.Model):
     def location(self):
         return '%s, %s' % (self.city, self.state)
 
+
+class DataUpdate(models.Model):
+    numero = models.IntegerField(unique=True)
+    datetime_start = models.DateTimeField()
+    datetime_end = models.DateTimeField()
+    plans = models.ManyToManyField(BusinessPlan)
+
+
     class Meta:
-        abstract = True
+        ordering = ['-numero']
 
-
-class LateBusinessPlan(BusinessPlan):
-    business = models.OneToOneField('Business', on_delete=models.CASCADE, related_name='late_business_plan')
-
-    def __str__(self):
-        return self.business.name + ' (BusinessPlan)'
-
-
-class EarlyBusinessPlan(BusinessPlan):
-    category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='early_business_plans')
+    def timeInSeconds(self):
+        return (self.datetime_end-self.datetime_start).seconds
 
     def __str__(self):
-        return self.category.specialty + ' (BusinessPlan)'
+        return 'Update '+str(self.numero)
 
 
 
+def identify_all_opinion_by_noun(noun, topic):
+    opinions = Opinion.objects.filter(lemmatized__contains=noun)
+    for opinion in opinions:
+        opinion.topics.add(topic)
+    return opinions
 
 

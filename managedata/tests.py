@@ -6,7 +6,7 @@ from django.test import TestCase
 from managedata.mining.classification import AnalyzeVader
 from managedata.mining.collect import CollectRival, CollectReview
 from managedata.mining.organization import Organization
-from managedata.models import EarlyBusinessPlan, Business, Review, Opinion
+from managedata.models import BusinessPlan, Business, Review, Opinion
 import managedata.mining.run_mining as run
 
 
@@ -16,8 +16,8 @@ class TestCollectRival(TestCase):
     fixtures = ['text_fixtures.json']
 
     def setUp(self):
-        self.plan = EarlyBusinessPlan.objects.get(id=1)
-        self.collect = CollectRival(earlyBusinessPlan=self.plan)
+        self.plan = BusinessPlan.objects.get(id=1)
+        self.collect = CollectRival(businessPlan=self.plan)
 
     @unittest.skip('não precisa ser testado agora')
     def test_places_all(self):
@@ -30,8 +30,8 @@ class TestCollectReview(TestCase):
     fixtures = ['text_fixtures.json']
 
     def setUp(self):
-        self.plan = EarlyBusinessPlan.objects.get(id=1)
-        self.collect = CollectReview(earlyBusinessPlan=self.plan)
+        self.plan = BusinessPlan.objects.get(id=1)
+        self.collect = CollectReview(businessPlan=self.plan)
 
     @unittest.skip('não precisa ser testado agora')
     def test_reviews_all(self):
@@ -47,7 +47,7 @@ class TestOrganization(TestCase):
     fixtures = ['text_fixtures.json']
 
     def setUp(self):
-        self.plan = EarlyBusinessPlan.objects.get(id=1)
+        self.plan = BusinessPlan.objects.get(id=1)
         self.reviews = Review.objects.filter(business__category=self.plan.category)
         self.org = Organization()
 

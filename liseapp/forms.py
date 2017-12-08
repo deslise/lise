@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from managedata.models import EarlyBusinessPlan, RequestCategory
+from managedata.models import BusinessPlan, RequestCategory
 
 
 class RegisterForm(UserCreationForm):
@@ -27,7 +27,7 @@ class NewPlanForm(forms.ModelForm):
     specialty = forms.CharField(max_length=240)
 
     class Meta:
-        model = EarlyBusinessPlan
+        model = BusinessPlan
         fields = ('description', 'state', 'city', 'branch', 'specialty')
 
 
@@ -52,7 +52,7 @@ class EditDescriptionPlan(forms.ModelForm):
     id = forms.IntegerField()
 
     class Meta:
-        model = EarlyBusinessPlan
+        model = BusinessPlan
         fields = ('description','id')
 
 

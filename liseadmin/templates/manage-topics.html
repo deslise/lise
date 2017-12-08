@@ -1,0 +1,64 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Gerenciamento de topicos</h2>
+<div class="dashboard">
+    <div class="dashboard-item">
+        <div class="dashboard-item-header">
+            <span class="dashboard-item-header-title">Tópicos</span>
+        </div>
+        <div class="dashboard-item-content">
+            <table class="table-large">
+                <tr>
+                    <th>Tópico</th>
+                    <th>N° de itens</th>
+                    <th>N° de categorias</th>
+                </tr>
+                {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.topic }}</td>
+                    <td>{{ topic.numberItems }}</td>
+                    <td>{{ topic.numberCategories }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="dashboard-item" id="items">
+        <div class="dashboard-item-header">
+            <span class="dashboard-item-header-title">Items Topics</span>
+        </div>
+        <div class="object-tools initialized">
+            <label for="searchByCat">Categoria: </label>
+            <input type="text" id="searchByCat" onkeyup="myFunction()" placeholder="Search by category">
+            <label for="searchByTop">Tópico:</label>
+            <input type="text" id="searchByTop" onkeyup="myFunction()" placeholder="Search by topic">
+        </div>
+        <div class="dashboard-item-content">
+            <table class="table-large" id="myTable">
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Tópico</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.noun }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.topic }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+    <script src="{% static 'js/functions-admin.js' %}"></script>
+
+{% endblock %}

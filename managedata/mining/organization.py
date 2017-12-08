@@ -36,39 +36,43 @@ class Organization(object):
         stop_word_pattern = re.compile('|'.join(stop_word_regex_list), re.IGNORECASE)
         return stop_word_pattern
 
-    def remove_verbs(self, phrase):
-        try:
-            sentence = self.cogroo.analyze(phrase).sentences[0].tokens
-            for word in sentence:
-                if word.pos == 'v-fin':
-                    person = word.feat.split('=')[1]
-                    if person == '1S' or word.lemma == 'ser':
-                        phrase = phrase.replace(word.lexeme, '')
-        except:
-            return ''
+    def remove_verbs(self, tokens, phrase):
+        for word in tokens:
+            if word.pos == 'v-fin':
+                person = word.feat.split('=')[1]
+                if person == '1S' or word.lemma == 'ser':
+                    phrase = phrase.replace(word.lexeme, '')
         return phrase
 
-    def clean_sentence(self, sentence, pattern_regex):
-        phrase = self.remove_verbs(' '.join(sentence.split()))
-        phrase = re.sub(pattern_regex, '', phrase.strip())
-        phrase = ' '.join(phrase.split())
-        if phrase.count(' ') > 0:
-            return phrase.capitalize()
-        return ''
 
-    def validate_sentence(self, clean_sentence):
-        sentence = self.cogroo.analyze(clean_sentence).sentences[0].tokens
-        pos = list(map(lambda x: x.pos, sentence))
+    def clean_sentence(self, sentence, pattern_regex):
+        phrase = re.sub(pattern_regex, '', sentence.strip())
+        tokens = self.tokens_cogroo(phrase)
+        if self.validate_sentence(tokens):
+            words = self.remove_verbs(tokens, phrase).split()
+            if len(words) > 1:
+                return ' '.join(words).capitalize()
+        return False
+
+
+    def validate_sentence(self, tokens):
+        pos = list(map(lambda x: x.pos, tokens))
         return 'n' in pos and 'adj' in pos
+
+
+    def tokens_cogroo(self, phrase):
+        sentence = self.cogroo.analyze(' '.join(phrase.split())).sentences
+        tokens = sentence[0].tokens if sentence else []
+        return tokens
+
 
     def generate_keywords(self, sentence_list, pattern_regex):
         self.service = build('translate', 'v2', developerKey='AIzaSyB0UBbtTXcMS8DrdviSLxab9Oa0B_Dcclg')
         phrase_list = {}
         for sentence in sentence_list:
             sentence = self.clean_sentence(sentence, pattern_regex)
-            if sentence != '':
-                if self.validate_sentence(sentence):
-                    phrase_list[self.translate(sentence)] = sentence
+            if sentence:
+                phrase_list[self.translate(sentence)] = sentence
         return phrase_list
 
     def translate(self, frase, lang='en'):

@@ -5,10 +5,10 @@ import googlemaps as g
 
 class CollectRival(object):
 
-    def __init__(self, earlyBusinessPlan):
-        self.category = earlyBusinessPlan.category
+    def __init__(self, businessPlan):
+        self.category = businessPlan.category
         self.keywords = Keyword.objects.filter(category=self.category)
-        self.address = earlyBusinessPlan.location
+        self.address = businessPlan.location()
         self.client = g.Client('AIzaSyB0UBbtTXcMS8DrdviSLxab9Oa0B_Dcclg')
         self.location = self.client.geocode(self.address)[0]['geometry']['location']
 
@@ -37,21 +37,27 @@ class CollectRival(object):
         placesList = []
         for query in self.keywords:
             result = self.client.places(query, self.location)
-            self.add_ids(result['results'])
+            locais = filter(self.isNear, result['results'])
+            self.add_ids(locais)
             while 'next_page_token' in result:
                 try:
                     next = result['next_page_token']
                     result = self.client.places(query, self.location, page_token=next)
-                    self.add_ids(result['results'])
+                    locais = filter(self.isNear, result['results'])
+                    self.add_ids(locais)
                 except:
                     continue
         return placesList
 
+    def isNear(self, local):
+        coo = local['geometry']['location']
+        return (abs(self.location['lat'] - coo['lat']) <= 0.3 and abs(self.location['lng'] - coo['lng']) <= 0.3)
+
 
 class CollectReview(object):
 
-    def __init__(self, earlyBusinessPlan):
-        self.category = earlyBusinessPlan.category
+    def __init__(self, businessPlan):
+        self.category = businessPlan.category
         self.client = g.Client('AIzaSyB0UBbtTXcMS8DrdviSLxab9Oa0B_Dcclg')
 
 
@@ -62,7 +68,7 @@ class CollectReview(object):
             result = g.places.place(self.client, id, language=None)['result']
             business = Business.objects.get(place_id=id)
             for review in result.setdefault('reviews', {}):
-                review_id = review['author_url'].split('/')[5] + '/' + id
+                review_id = review['author_url'].split('/')[5] + '/' + id if review.get('author_url') else False
                 if review_id not in reviews_ids and review['text'] != '':
                     review = Review.objects.create(review_id=review_id, complete_text=review['text'], business=business)
                     self.saveOpinions(review)
@@ -76,7 +82,10 @@ class CollectReview(object):
         vader = AnalyzeVader()
         for sentence in sentences_dict.items():
             polarity = vader.polarity(sentence[0])
-            Opinion.objects.create(text_pt=sentence[1], text_en=sentence[0], polarity=polarity, review=review)
+            lemmatized = ' '.join(map(lambda x: x.lemma, org.tokens_cogroo(sentence[1])))
+            Opinion.objects.create(text_pt=sentence[1], text_en=sentence[0], polarity=polarity, review=review, lemmatized=lemmatized)
+
+
 
 
 

@@ -125,11 +125,6 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='opinions', to='managedata.Review'),
         ),
         migrations.AddField(
-            model_name='earlybusinessplan',
-            name='enterprising',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='managedata.Enterprising'),
-        ),
-        migrations.AddField(
             model_name='business',
             name='category',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_business', to='managedata.CategoryBusiness'),

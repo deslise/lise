@@ -30,17 +30,17 @@ function initDonutChartAll() {
     var soma_p = 0.0
     for (var i = 0; i < counts.length; i++) {
         val = parseFloat((parseInt(counts[i])/soma * 100).toFixed(2)) 
-        console.log(val);
+//        console.log(val);
         data[i] = {
             label: topics[i],
             value: val
         }
-        soma_p += val
+//        soma_p += val
     };    
-    data[counts.length] = {
-        label: 'Sem Categoria',
-        value: parseFloat((soma_p/soma * 100).toFixed(2))
-    };
+//    data[counts.length] = {
+//        label: 'Sem Categoria',
+//        value: parseFloat((soma_p/soma * 100).toFixed(2))
+//    };
 
     Morris.Donut({
         element: "donut_chart_all",

@@ -1,0 +1,36 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Planos de Negócios</h2>
+<div class="dashboard">
+    <div class="dashboard-item">
+        <div class="dashboard-item-content">
+            <table class="table-large">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Empreendedor</th>
+                    <th>Dias de análise</th>
+                    <th>Status</th>
+                </tr>
+                {% for plan in plans %}
+                <tr>
+                    <td><a href="{{ plan.category.get_admin_url }}">{{ plan.category }}</a></td>
+                    <td>{{ plan.city }}</td>
+                    <td>{{ plan.state }}</td>
+                    <td><a href="{{ plan.enterprising.get_admin_url }}">{{ plan.enterprising }}</a></td>
+                    <td>{{ plan.ageDays}}</td>
+                    <td>{{ plan.get_status_display }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -13,20 +13,32 @@ class Summarization(object):
     def identify_opinion_topics(self, opinion):
         try:
             nouns = list(filter(lambda x: x.pos == 'n', self.cogroo.analyze(opinion.text_pt.lower()).sentences[0].tokens))
-            topics = self.check_topics(nouns, opinion.review.business.category)
+            topics = self.check_topics(nouns, opinion)
             for topic in topics:
-                if not topic in opinion.topics.get_queryset():
-                    opinion.topics.add(topic)
+                opinion.topics.add(topic)
         except Exception as e:
             print(e)
 
-    def check_topics(self, nouns, category):
+
+
+
+    def check_topics(self, nouns, opinion):
+        category = opinion.review.business.category
         topics = []
         for noun in nouns:
-            itemsTopics = ItemTopic.objects.filter(categories=category, noun=noun.lemma)
+            itemsTopics = ItemTopic.objects.filter(noun=noun.lemma)
             if itemsTopics:
-                topics.append(itemsTopics[0].topic)
+                item = itemsTopics.first()
+                if category in item.categories.all():
+                    if item.status == 'ativo': topics.append(itemsTopics[0].topic)
+                else:
+                    item.status = 'novo'
+                    item.context = opinion.text_pt
+                    item.save(force_update=True)
+                    item.categories.add(category)
             else:
+                item = ItemTopic.objects.create(noun=noun.lemma,context=opinion.text_pt)
+                item.categories.add(category)
                 print(noun.lemma)
         return topics
 
@@ -35,4 +47,5 @@ class Summarization(object):
         opinions = Opinion.objects.filter(review__business__category=self.plan.category)
         for opinion in opinions:
             self.identify_opinion_topics(opinion)
+
 

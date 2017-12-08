@@ -1,0 +1,48 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h2>Item dos tópicos</h2>
+<div id="content_update">
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <div class="dashboard-item-header">
+                <span class="dashboard-item-header-title">Para avaliar</span>
+            </div>
+            <div class="dashboard-item-content">
+                {% if items %}
+                <table class="table-large">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Contexto</th>
+                        <th>Sugestão</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for item in items %}
+                    <tr id="item{{ item.id }}">
+                        <td>{{ item.noun }}</td>
+                        <td>{{ item.context }}</td>
+                        <td>{{ item.categories.last }}</td>
+                        <td><a href="javascript:void(0);" onclick="editItem({{ item.id }})"><img src="{% static 'admin/img/icon-yes.svg' %}"></a></td>
+                        <td><a href="javascript:void(0);" onclick="recusarItem({{ item.id }});"><img src="{% static 'admin/img/icon-no.svg' %}"></a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <ul>
+                    <li><span colspan="4">Nenhum item novo.</span></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+    <script src="{% static 'js/functions-admin.js' %}"></script>
+
+{% endblock %}

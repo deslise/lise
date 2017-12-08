@@ -1,0 +1,20 @@
+{% load jet_dashboard_tags %}
+
+<ul>
+    {% for req in module.children %}
+        <li>
+            <span class="float-right">
+                <span class="dim"> {{ req.date_request }}
+                    <span class="icon-clock tooltip"></span>
+                </span>
+            </span>
+
+
+            <a href="{{ req.get_admin_url }}">{{ req }}</a>
+        </li>
+    {% empty %}
+        <li>
+            Nenhuma solicitação
+        </li>
+    {% endfor %}
+</ul>

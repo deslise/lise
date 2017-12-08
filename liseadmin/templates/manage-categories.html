@@ -1,0 +1,43 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h2>Categorias</h2>
+<div class="dashboard">
+    <div class="dashboard-item">
+        <div class="dashboard-item-header">
+            <span class="dashboard-item-header-title">Categorias</span>
+        </div>
+        <div class="dashboard-item-content">
+            <table class="table-large">
+                <tr>
+                    <th>Ramo</th>
+                    <th>Especialidade</th>
+                    <th>Palavras Chaves<a class="related-widget-wrapper-link add-related initialized" href="/admin/managedata/keyword/add/">
+                        <span class="addlink"></span></a></th>
+                    <th>Nº de negócios</th>
+                    <th>Ativo</th>
+                    <th></th>
+                </tr>
+                {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.list_branchs }}</td>
+                    <td>{{ cat.specialty }}</td>
+                    <td>
+                        {% for key in cat.list_keywords %}
+                        <a href="{{ key.get_admin_url }}">{{key.keyword}}</a>;
+                        {% endfor %}
+                    </td>
+                    <td>{{ cat.quantBusiness }}</td>
+                    <td>{{ cat.active }}</td>
+                    <td><a href="{{ cat.get_admin_url }}"><span class="icon-edit"></span></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
