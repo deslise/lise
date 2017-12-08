@@ -33,10 +33,10 @@ class RequestCategory(models.Model):
     branch = models.CharField(max_length=240)
     description = models.TextField()
     status = models.CharField(max_length=8, choices=STATUS, default='pendente')
-    date_request = models.DateField()
+    date_request = models.DateField(default=date.today())
+    reason_refuse = models.TextField(null=True, blank=True)
     enterprising = models.ForeignKey('Enterprising', on_delete=models.CASCADE, related_name='requests')
-
-
+    category_related = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='requestcategories', blank=True, null=True)
 
     def __str__(self):
         return self.specialty + ' - ' + self.branch

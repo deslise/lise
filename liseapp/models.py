@@ -1,6 +1,6 @@
 import json
 
-from datetime import date
+from datetime import date, datetime
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
@@ -16,7 +16,7 @@ from managedata.models import Opinion, Topic, Weekday, Business, Enterprising
 class Notification(models.Model):
     title = models.CharField(max_length=248)
     message = models.TextField()
-    date = models.DateField()
+    date = models.DateTimeField(default=datetime.now())
     user = models.ForeignKey(Enterprising, on_delete=models.CASCADE)
     viewed = models.BooleanField(default=False)
 
@@ -29,7 +29,7 @@ class Notification(models.Model):
 
 
     def days_ago_created(self):
-        ago = (date.today() - self.date).days
+        ago = (datetime.now().date() - self.date.date()).days
         return 'hoje' if ago == 0 else '1 dia atrás'if ago==1 else '%d dias atrás' % (ago)
 
     def get_href(self):

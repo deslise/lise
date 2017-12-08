@@ -32,7 +32,11 @@
                         <div class="body">
                             <div class="list-group" id="noti">
                                 {% for notification in notifications %}
-                                <a href="{{ notification.get_href }}" type="button" id="noti{{ notification.id }}" class="list-group-item"><span class="badge ">{{ notification.days_age_created }}</span>{{ notification.title }}</a>
+                                <a href="{{ notification.get_href }}" type="button" id="noti{{ notification.id }}" class="list-group-item">
+                                    <span class="badge ">{{ notification.days_ago_created }}</span>
+                                    {% if not notification.viewed %}<b>{{ notification.title }}</b>
+                                    {% else %}{{ notification.title }}{% endif %}
+                                </a>
                                 {% endfor %}
                             </div>
                         </div>

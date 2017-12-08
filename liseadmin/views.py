@@ -2,8 +2,11 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from liseadmin.forms import RefuseRequests, AcceptRequests
+from liseapp.models import Notification
 from managedata.mining.run_mining import update_business_plan
-from managedata.models import RequestCategory, CategoryBusiness, DataUpdate, Topic, ItemTopic, BusinessPlan
+from managedata.models import RequestCategory, CategoryBusiness, DataUpdate, Topic, ItemTopic, BusinessPlan, \
+    Enterprising
 
 
 def requestCategories(request):
@@ -19,10 +22,47 @@ def manageCategories(request):
     return render(request, 'manage-categories.html', vals)
 
 
-def setStateRequest(request, req_id, state):
+def acceptRequest(request, req_id):
     req = RequestCategory.objects.get(id=req_id)
-    req.set_status(state)
-    return redirect('liseadmin:request-categories')
+    if request.method == 'POST':
+        form = AcceptRequests(request.POST)
+        if form.is_valid():
+            category = form.cleaned_data.get('category_related')
+            req.category_related = category
+            req.status = 'aceito'
+            req.save(force_update=True)
+            Notification.objects.create(title='Solicitação de categoria aceita',
+                                        message='A solicitação de categoria %s foi aceita.\nA categoria desejada é a %s do ramo %s' % (
+                                        req.specialty, category.specialty, category.branch.first().name),
+                                        user=req.enterprising)
+            return redirect('liseadmin:request-categories')
+        print(form.errors)
+    else:
+        form = AcceptRequests()
+    vals = {'form': form, 'req_id': req_id}
+    return render(request, 'accept-request.html', vals)
+
+
+def refuseRequest(request, req_id):
+    req = RequestCategory.objects.get(id=req_id)
+    if request.method == 'POST':
+        form = RefuseRequests(request.POST)
+        if form.is_valid():
+            reason = form.cleaned_data.get('reason')
+            req.reason_refuse = reason
+            req.status = 'recusado'
+            req.save(force_update=True)
+            Notification.objects.create(title='Solicitação de categoria recusada',
+                                        message='A solicitação de categoria %s foi recusada.\nMotivo: %s' % (req.specialty, reason),
+                                        user=req.enterprising)
+            return redirect('liseadmin:request-categories')
+        print(form.errors)
+    else:
+        form = RefuseRequests()
+    vals = {'form':form,'req_id':req_id}
+    return render(request, 'refuse-request.html', vals)
+
+
 
 
 def managePlan(request):

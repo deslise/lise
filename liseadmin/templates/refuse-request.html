@@ -1,0 +1,26 @@
+{% extends 'base-admin.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div>
+    <form id="form_reason_refuse" action="{% url 'liseadmin:refuse-request' req_id %}" method="POST">
+        {% csrf_token %}
+
+        <fieldset class="module aligned  module_0 initialized">
+            <div class="form-row field-name">
+                <div>
+                    <label for="reason">Motivo: </label>
+                    <textarea id="reason" name="reason" class="fill_width" required></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <div class="submit-row">
+            <div class="object-tools initialized">
+                <button type="submit" class="button font-large center" title="Enviar o motivo de recusar a solcitação" >Recusar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

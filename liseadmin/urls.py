@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^update_data/$', views.updateData, name='update-data'),
     url(r'^manage_topics/$', views.manageTopics, name='manage-topics'),
     url(r'^recusar_item/(?P<item_id>[\d]+)/$', views.recusarItem, name='recusar-item'),
-    url(r'^state_request/(?P<req_id>[\d]+)/(?P<state>.*)$', views.setStateRequest, name='state-request'),
+    url(r'^refuse_request/(?P<req_id>[\d]+)/$', views.refuseRequest, name='refuse-request'),
+    url(r'^accept_request/(?P<req_id>[\d]+)/$', views.acceptRequest, name='accept-request'),
 ]

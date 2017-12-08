@@ -12,7 +12,7 @@ from django.shortcuts import render, redirect
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
-    CategoryBusiness
+    CategoryBusiness, RequestCategory
 
 
 def profileLoggedIn(request):
@@ -160,6 +160,10 @@ def registerPlan(request):
                                                     enterprising=enterprising,
                                                     category=category,
                                                     create_date=date.today())
+            Notification.objects.create(title='Novo plano de negócio criado',
+                                        message='Seu plano cadastrado passará por uma primeira análise, em breve você '
+                                                'poderá monitorá as informações dos seus possiveis concorrentes.',
+                                        user=enterprising)
             return redirect('liseapp:index')
         print(form1.errors)
     else:
@@ -167,9 +171,13 @@ def registerPlan(request):
     if 'form_request_category' in request.POST:
         form2 = RequestCategoryForm(request.POST)
         if form2.is_valid():
-            form2.save()
-            form2.date_request = date.today()
-            form2.save(force_update=True)
+            data = form2.cleaned_data
+            RequestCategory.objects.create(enterprising=enterprising, specialty=data.get('specialty'),
+                                           branch=data.get('branch'), description=data.get('description'))
+            Notification.objects.create(title='Nova solicitação de categoria',
+                                        message='A solicitação de categoria %s irá ser avaliada e em breve você '
+                                                'receberá uma resposta.' % (form2.cleaned_data.get('specialty', '')),
+                                        user=enterprising)
             return redirect('liseapp:index')
         print(form2.errors)
     else:
@@ -184,6 +192,9 @@ def deletePlan(request, plan_id):
     plan = BusinessPlan.objects.get(id=plan_id)
     plan.status='cancelada'
     plan.save(force_update='True')
+    Notification.objects.create(title='Análise de concorrentes cancelado',
+                                message='Você cancelou o plano de negocio %d e não poderá mais análisar as informações.' % (plan.category.specialty),
+                                user=profileLoggedIn(request))
     return redirect('liseapp:index')
 
 
@@ -198,6 +209,9 @@ def editPlan(request, plan_id):
 
 def pageNotifications(request, pk=False):
     noti = Notification.objects.get(id=pk) if pk else False
+    if noti:
+        noti.viewed = True
+        noti.save(force_update=True)
     profile = profileLoggedIn(request)
     n = Notification.objects.filter(user=profile)
     vals = dict(dict_base(request), **{'notifications':n, 'select':noti})

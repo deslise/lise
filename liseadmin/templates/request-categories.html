@@ -28,8 +28,8 @@
                     <td>{{ req.description }}</td>
                     <td>{{ req.date_request }}</td>
                     <td><a href="{{ req.enterprising.get_admin_url }}">{{ req.enterprising }}</a></td>
-                    <td><a href="{% url 'liseadmin:state-request' req.id 'aceito' %}"><img src="{% static 'admin/img/icon-yes.svg' %}"></a></td>
-                    <td><a href="{% url 'liseadmin:state-request' req.id 'recusado' %}"><img src="{% static 'admin/img/icon-no.svg' %}"></a></td>
+                    <td><a href="{% url 'liseadmin:accept-request' req.id %}"><img src="{% static 'admin/img/icon-yes.svg' %}"></a></td>
+                    <td><a href="{% url 'liseadmin:refuse-request' req.id %}"><img src="{% static 'admin/img/icon-no.svg' %}"></a></td>
                 </tr>
                 {% endfor %}
             </table>
