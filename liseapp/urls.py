@@ -3,6 +3,8 @@ from django.contrib.auth import views as auth_views
 
 from liseapp import views
 
+handler404 = 'views.error404'
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^perfil$', views.myAccountDetails, name='my-account-details'),

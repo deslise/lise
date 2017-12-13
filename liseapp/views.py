@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.views.defaults import page_not_found
+
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
@@ -243,4 +245,8 @@ def signUp(request):
 
 def logout(request):
     return redirect('liseapp:signin')
+
+
+def error404(request):
+    return page_not_found(request, 'error-404.html')
 

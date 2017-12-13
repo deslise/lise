@@ -13,8 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler404
 from django.contrib import admin
+
+from liseapp import views
+
 
 urlpatterns = [
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
@@ -23,3 +26,5 @@ urlpatterns = [
     url(r'^', include('liseapp.urls', namespace='liseapp')),
     url(r'^admin/', include('liseadmin.urls', namespace='liseadmin')),
 ]
+handler404 = views.error404
+
