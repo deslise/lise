@@ -12,7 +12,8 @@ from django.shortcuts import render, redirect
 from django.views.defaults import page_not_found
 
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
-from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification
+from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification, list_weekhours_majority, \
+    list_weekhours_minority, ranking_business
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness, RequestCategory
 
@@ -96,9 +97,14 @@ def dashboardDetails(request, plan_id):
     lng_lat = list_locations(category=plan.category)
     lng = list(map(lambda l: l[0], lng_lat))
     lat = list(map(lambda l: l[1], lng_lat))
+    weekhours_max = list_weekhours_majority(category=plan.category)
+    class_css = ['bg-pink', "bg-cyan", "bg-orange", "bg-teal", "bg-purple", 'bg-blue-grey', 'bg-indigo']
+    for i, week in enumerate(weekhours_max): week.update({'class_css': class_css[i]})
+    ranking = ranking_business(plan.category)[0:7]
     vals = dict(dict_base(request), **{'item':'all',
         'plan':plan, 'rivals': rivals, 'reviews': reviews, 'nouns':nouns, 'lngs': lng, 'lats': lat,
-        'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu, 'week_count': week_count})
+        'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu, 'week_count': week_count,
+        'weekhours_max':weekhours_max, 'ranking':ranking})
     return render(request, 'dashboard.html', vals)
 
 
@@ -126,13 +132,34 @@ def polarityTopics(request, plan_id):
         'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu})
     return render(request, 'polarity-topics.html', vals)
 
+
+def rankingBusiness(request, plan_id):
+    plan = BusinessPlan.objects.get(id=plan_id)
+    ranking = ranking_business(plan.category)
+    vals = dict(dict_base(request), **{'item':'business', 'subitem':'rankingbusiness', 'plan':plan, 'ranking':ranking})
+    return render(request, 'ranking-business.html', vals)
+
+
 def operatingDays(request, plan_id):
     plan = BusinessPlan.objects.get(id=plan_id)
     week_count = list_weekdays(category=plan.category)
-    counts = list(map(lambda x: x[1], list_weekdays(category=plan.category)))
+    counts = list(map(lambda x: x[1], week_count))
     vals = dict(dict_base(request), **{'plan':plan,
         'item':'operating', 'subitem':'operatingdays', 'week_count':week_count, 'counts':counts})
     return render(request, 'operating-days.html', vals)
+
+
+def operatingHours(request, plan_id):
+    plan = BusinessPlan.objects.get(id=plan_id)
+    weekhours_max = list_weekhours_majority(category=plan.category)
+    weekhours_min = list_weekhours_minority(category=plan.category)
+    class_css = ['bg-pink',"bg-cyan","bg-orange","bg-teal", "bg-purple",'bg-blue-grey','bg-indigo']
+    for i, week in enumerate(weekhours_max): week.update({'class_css': class_css[i]})
+    for i, week in enumerate(weekhours_min): week.update({'class_css': class_css[i]})
+    vals = dict(dict_base(request), **{'item':'operating', 'subitem':'operatinghours', 'plan':plan,
+                                       'weekhours_max':weekhours_max, 'weekhours_min':weekhours_min})
+    return render(request, 'operating-hours.html', vals)
+
 
 def competitionRegions(request, plan_id):
     plan = BusinessPlan.objects.get(id=plan_id)

@@ -1,0 +1,71 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>RANKING DOS CONCORRENTES</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    Pontuação Lise
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    A pontuação é baseado no número de avaliações, notas de avaliações e a porcentagem
+                                    de avaliações positivas e negativa de cada empresa.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Lista dos Concorrentes</h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Empresa</th>
+                                        <th>Pontuação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for b in ranking %}
+                                    <tr>
+                                        <th scope="row">{{ b.position }}</th>
+                                        <td>{{ b.name }}</td>
+                                        <td>{{ b.score }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <!--<script src="{% static 'plugins/morrisjs/morris.js' %}"></script>-->
+    <!--<script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>-->
+
+    <!--<script src="{% static 'js/pages/operating-hours.js' %}"></script>-->
+
+{% endblock %}

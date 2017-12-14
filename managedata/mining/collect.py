@@ -13,24 +13,24 @@ class CollectRival(object):
         self.location = self.client.geocode(self.address)[0]['geometry']['location']
 
 
-    def add_ids(self, result):
-        places_ids = list(map(lambda x: x.place_id, Business.objects.filter(category=self.category)))
-        for place in result:
-            if place['place_id'] not in places_ids:
-                business = Business.objects.create(name=place['name'],
-                                        place_id=place['place_id'],
-                                        category=self.category,
-                                        location=place['geometry']['location'])
-                self.collect_opening_hours(place['place_id'], business)
+    def add_ids(self, results):
+        for result in results:
+            place = g.places.place(self.client, result['place_id'], language=None)['result']
+            sl= list(map(lambda x: x['short_name'],
+                        filter(lambda x: 'sublocality' in x['types'], place.get('address_components',[]))))
+            defaults={'name':place['name'],'category':self.category,'location':place['geometry']['location'],
+                      'rating':place.get('rating',0),'sublocation':sl[0] if sl else ''}
+            business = Business.objects.update_or_create(place_id=place['place_id'],defaults=defaults)
+            self.collect_opening_hours(place, business[0])
 
 
 
-    def collect_opening_hours(self, place_id, business):
-        result = g.places.place(self.client, place_id, language=None)['result']
-        if 'opening_hours' in result:
-            for item in result['opening_hours']['weekday_text']:
+    def collect_opening_hours(self, place, business):
+        if 'opening_hours' in place:
+            for item in place['opening_hours']['weekday_text']:
                 items = item.split(': ')
-                Weekday.objects.create(weekday=items[0], hours=items[1], business=business)
+                detaults={'hours':items[1]}
+                weekday = Weekday.objects.update_or_create(weekday=items[0], business=business, defaults=detaults)
 
 
     def placesAll(self):

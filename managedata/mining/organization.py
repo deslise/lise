@@ -61,7 +61,7 @@ class Organization(object):
 
 
     def tokens_cogroo(self, phrase):
-        sentence = self.cogroo.analyze(' '.join(phrase.split())).sentences
+        sentence = self.cogroo.analyze(' '.join(phrase.split())).sentences or False
         tokens = sentence[0].tokens if sentence else []
         return tokens
 

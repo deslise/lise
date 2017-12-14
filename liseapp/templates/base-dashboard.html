@@ -45,6 +45,11 @@
                                     <span>Dias de Funcionamento</span>
                                 </a>
                             </li>
+                            <li id="operatinghours">
+                                <a href="{% url 'liseapp:operating-hours' plan.id %}">
+                                    <span>Horário de Funcionamento</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li id="maps">
@@ -56,6 +61,19 @@
                             <li id="competitionregions">
                                 <a href="{% url 'liseapp:competition-regions' plan.id %}">
                                     <span>Regiões de Concorrencia</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="business">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">business</i>
+                            <span>Concorrentes</span>
+                        </a>
+                        <ul class="ml-menu active">
+                            <li id="rankingbusiness">
+                                <a href="{% url 'liseapp:ranking-business' plan.id %}">
+                                    <span>Ranking</span>
                                 </a>
                             </li>
                         </ul>

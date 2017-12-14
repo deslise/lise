@@ -1,0 +1,97 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>HORÁRIO DE FUNCIONAMENTO</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    HORÁRIO ABERTO
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    Horários de funcionamento dos concorrentes são importante para você ficar sintonizado no mercado.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>HORÁRIO DE FUNCIONAMENTO DA MAIORIA</h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Dia da Semana</th>
+                                        <th>Abre</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wh in weekhours_max %}
+                                    <tr class="{{ wh.class_css }}">
+                                        <td>{{ wh.week }}</td>
+                                        <td>{{ wh.open }}</td>
+                                        <td>{{ wh.close }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>HORÁRIO DE FUNCIONAMENTO DA MINORIA</h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Dia da Semana</th>
+                                        <th>Abre</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wh in weekhours_min %}
+                                    <tr class="{{ wh.class_css }}">
+                                        <td>{{ wh.week }}</td>
+                                        <td>{{ wh.open }}</td>
+                                        <td>{{ wh.close }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <script src="{% static 'js/pages/operating-hours.js' %}"></script>
+
+{% endblock %}

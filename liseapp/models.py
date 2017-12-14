@@ -1,6 +1,7 @@
 import json
 
 from datetime import date, datetime
+from functools import reduce
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
@@ -64,6 +65,51 @@ def list_weekdays(category):
     return l
 
 
+def convert_hours(hour):
+    open_close = ['–––', '–––']
+    if hour == 'Open 24 hours':
+        open_close = ['00:00','00:00']
+    if '–' in hour:
+        for i, str_h in enumerate(hour.split(' – ')):
+            if 'AM' in str_h:
+                open_close[i] = str_h.replace(' AM', '')
+            elif 'PM' in str_h:
+                h, m = str_h.replace(' PM', '').split(':')
+                open_close[i] = str(int(h)+12)+':'+m
+            else:
+                open_close[i] = str_h
+    return tuple(open_close)
+
+
+def list_weekhours_majority(category):
+    weekday = Weekday.objects.filter(business__category=category).values('weekday', 'hours').annotate(
+        count=Count('weekday'))
+    weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+    l = []
+    for i in range(0,7):
+        weekhour = list(filter(lambda x: x.get('weekday')==weekdays[i], weekday))
+        max_hour = max(map(lambda x:x.get('count'), weekhour))
+        hour = list(map(lambda x: x.get('hours'), filter(lambda x: x.get('count')==max_hour, weekhour)))[0]
+        max_hour_open, max_hour_close = convert_hours(hour)
+        l.append({'week':semana[i],'open':max_hour_open, 'close':max_hour_close})
+    return l
+
+
+def list_weekhours_minority(category):
+    weekday = Weekday.objects.filter(business__category=category).values('weekday', 'hours').annotate(
+        count=Count('weekday'))
+    weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+    l = []
+    for i in range(0,7):
+        weekhour = list(filter(lambda x: x.get('weekday')==weekdays[i], weekday))
+        min_hour = min(map(lambda x:x.get('count'), weekhour))
+        hour = list(map(lambda x: x.get('hours'), filter(lambda x: x.get('count')==min_hour, weekhour)))[0]
+        min_hour_open, min_hour_close = convert_hours(hour)
+        l.append({'week':semana[i],'open':min_hour_open, 'close':min_hour_close})
+    return l
+
 
 def list_locations(category):
     locations = list(map(lambda b: b.location.split(', '), Business.objects.filter(category=category)))
@@ -74,6 +120,22 @@ def list_locations(category):
         elif 'lat' in l[0] and 'lng' in l[1]:
             lng_lat.append((l[1].split(': ')[1][:-1], l[0].split(': ')[1]))
     return lng_lat
+
+
+def score_business(business):
+    pos = Opinion.objects.filter(review__business=business, polarity=1).count()
+    score = (pos * business.rating) or business.rating
+    return score
+
+
+def ranking_business(category):
+    business = Business.objects.filter(category=category)
+    l = [(b.name,score_business(b)) for b in business]
+    ranking = []
+    for i, b in enumerate(sorted(l, key=lambda x: x[1], reverse=True)):
+        ranking.append({'position':i+1, 'name':b[0], 'score':round(b[1],2)})
+    return ranking
+
 
 
 class EmailBackend(ModelBackend):

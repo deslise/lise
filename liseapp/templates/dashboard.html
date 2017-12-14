@@ -108,6 +108,76 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6 ">
+                    <div class="card">
+                        <div class="header">
+                            <h2>HORÁRIO DE FUNCIONAMENTO </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:operating-hours' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Dia da Semana</th>
+                                        <th>Abre</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wh in weekhours_max %}
+                                    <tr class="{{ wh.class_css }}">
+                                        <td>{{ wh.week }}</td>
+                                        <td>{{ wh.open }}</td>
+                                        <td>{{ wh.close }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Lista dos Concorrentes</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:ranking-business' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Empresa</th>
+                                        <th>Pontuação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for b in ranking %}
+                                    <tr>
+                                        <th scope="row">{{ b.position }}</th>
+                                        <td>{{ b.name }}</td>
+                                        <td>{{ b.score }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card" id="cardRegioesDeConcorrencia">
                         <div class="header">

@@ -92,9 +92,11 @@ class Keyword(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=100)
-    place_id = models.CharField(max_length=50)
+    place_id = models.CharField(max_length=50, unique=True)
     category = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='related_business')
     location = models.CharField(max_length=100)
+    rating = models.FloatField(default=0.0)
+    sublocation = models.CharField(max_length=100, default='')
 
 
     def __str__(self):
