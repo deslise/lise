@@ -1,0 +1,55 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>SUBLOCAIS DOS CONCORRENTES</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                   SUBLOCAIS
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    Para análisar melhor a localização dos seus concorrentes, veja índice de concorrentes
+                                    por bairros ou zonas da localidade desejada do plano de négocio.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card" id="cardDiasDeFuncionamento">
+                        <div class="header">
+                            <h2>ÍNDICE DE SUBLOCAIS</h2>
+                        </div>
+                        <div class="body">
+                            <canvas id="pie_chart_sub" data-sublocation='{{ sublocation }}' data-count="{{ count }}"
+                                  height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <script src="{% static 'js/pages/sublocations.js' %}"></script>
+
+{% endblock %}

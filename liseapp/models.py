@@ -137,6 +137,25 @@ def ranking_business(category):
     return ranking
 
 
+def list_sublocations(category):
+    business = Business.objects.filter(category=category).values('sublocation').exclude(sublocation='')
+    total = business.count()
+    b_by_l = business.annotate(count=Count('sublocation')).order_by('-count')
+    sublocation, count = [], []
+    for bl in b_by_l:
+        sublocation.append(bl['sublocation'])
+        count.append(round((bl['count']/total)*100, 2))
+    return sublocation, count
+
+
+def list_sublocations_small(category):
+    sublocation, count = list_sublocations(category)
+    sublocation = sublocation[:4]+['Outros']
+    rest = reduce(lambda x,y: x+y, count[4:])
+    total = reduce(lambda x,y:x+y, count)
+    count = count[:4]+[round(rest/total*100,2)]
+    return sublocation,count
+
 
 class EmailBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):

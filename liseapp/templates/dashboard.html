@@ -49,7 +49,7 @@
             </div>
 
             <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="header">
                             <h2>POLARIDADE DOS TÓPICOS</h2>
@@ -64,6 +64,24 @@
                         <div class="body">
                             <canvas id="bar_chart" data-pos="{{ count_pos }}" data-neg="{{ count_neg }}" data-neu="{{ count_neu }}"
                             data-count="{{ topics_count }}" data-topics="{{ nouns }}"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card" >
+                        <div class="header">
+                            <h2>ÍNDICE DE SUBLOCAIS</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:sublocations' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <canvas id="pie_chart_sub" data-sublocation='{{ sublocation }}' data-count="{{ count_sub }}"
+                                    height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -178,6 +196,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card" id="cardRegioesDeConcorrencia">
                         <div class="header">
@@ -225,6 +244,8 @@
 
     <!-- CHART LOADER -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="{% static 'js/pages/sublocations.js' %}"></script>
 
     <!-- Flot Charts Plugin Js -->
     <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>

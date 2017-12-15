@@ -13,7 +13,7 @@ from django.views.defaults import page_not_found
 
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification, list_weekhours_majority, \
-    list_weekhours_minority, ranking_business
+    list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness, RequestCategory
 
@@ -101,8 +101,9 @@ def dashboardDetails(request, plan_id):
     class_css = ['bg-pink', "bg-cyan", "bg-orange", "bg-teal", "bg-purple", 'bg-blue-grey', 'bg-indigo']
     for i, week in enumerate(weekhours_max): week.update({'class_css': class_css[i]})
     ranking = ranking_business(plan.category)[0:7]
+    sublocation, count_sub = list_sublocations_small(plan.category)
     vals = dict(dict_base(request), **{'item':'all',
-        'plan':plan, 'rivals': rivals, 'reviews': reviews, 'nouns':nouns, 'lngs': lng, 'lats': lat,
+        'plan':plan, 'rivals': rivals, 'sublocation':sublocation, 'count_sub':count_sub, 'reviews': reviews, 'nouns':nouns, 'lngs': lng, 'lats': lat,
         'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu, 'week_count': week_count,
         'weekhours_max':weekhours_max, 'ranking':ranking})
     return render(request, 'dashboard.html', vals)
@@ -138,6 +139,14 @@ def rankingBusiness(request, plan_id):
     ranking = ranking_business(plan.category)
     vals = dict(dict_base(request), **{'item':'business', 'subitem':'rankingbusiness', 'plan':plan, 'ranking':ranking})
     return render(request, 'ranking-business.html', vals)
+
+
+def sublocations(request, plan_id):
+    plan = BusinessPlan.objects.get(id=plan_id)
+    sublocation, count = list_sublocations(plan.category)
+    vals = dict(dict_base(request), **{'plan': plan, 'item': 'maps', 'subitem': 'sublocations',
+                                       'sublocation':sublocation, 'count':count})
+    return render(request, 'sublocations.html', vals)
 
 
 def operatingDays(request, plan_id):

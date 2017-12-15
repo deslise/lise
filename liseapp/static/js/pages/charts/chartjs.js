@@ -1,8 +1,8 @@
 $(function () {
-    new Chart(document.getElementById("bar_chart").getContext("2d"), getChartJs());
+    new Chart(document.getElementById("bar_chart").getContext("2d"), getChartBarJs());
 });
 
-function getChartJs() {
+function getChartBarJs() {
      var pos = document.getElementById("bar_chart").getAttribute("data-pos");
      var neg = document.getElementById("bar_chart").getAttribute("data-neg");
      var neu = document.getElementById("bar_chart").getAttribute("data-neu");
