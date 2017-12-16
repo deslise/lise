@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94c63bbb-b5aa-4c10-860f-d6010ff1a159" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0010_auto_20171215_0250.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0011_auto_20171215_2355.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0012_auto_20171216_0040.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0013_auto_20171216_0048.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0014_auto_20171216_0117.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0015_auto_20171216_0119.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0016_auto_20171216_0120.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0017_auto_20171216_0120.py" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0040_auto_20171215_0250.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0041_auto_20171215_2355.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0042_auto_20171216_0040.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0043_auto_20171216_0048.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0044_auto_20171216_0120.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0045_auto_20171216_0120.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lise/settings.py" afterPath="$PROJECT_DIR$/Lise/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
@@ -723,7 +737,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513300407038</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add análise de opiniões de concorrentes">
+      <created>1513399025336</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1513399025336</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -802,7 +823,8 @@
     <MESSAGE value="tentativa de personalisar pagina de error" />
     <MESSAGE value="novos pontos de análise" />
     <MESSAGE value="novos pontos de análise sublocation" />
-    <option name="LAST_COMMIT_MESSAGE" value="novos pontos de análise sublocation" />
+    <MESSAGE value="add análise de opiniões de concorrentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="add análise de opiniões de concorrentes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
