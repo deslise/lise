@@ -83,6 +83,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li id="review">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">comment</i>
+                            <span>Avaliação</span>
+                        </a>
+                        <ul class="ml-menu active">
+                            <li id="competitoropinions">
+                                <a href="{% url 'liseapp:competitor-opinions' plan.id %}">
+                                    <span>Opiniões Sobre Concorrentes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="legal">

@@ -85,6 +85,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>AVALIAÇÕES DOS CONCORRENTES</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="{% url 'liseapp:competitor-opinions' plan.id %}">
+                                        <i class="material-icons">launch</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div class="row" style="margin: 0 0 5px 0;">
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 alert alert-info ">
+                                    <span class=" left">{{ op_pos.0.text_pt | safe }}</span>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 alert bg-pink right">
+                                    <span class="right">{{ op_neg.0.text_pt | safe }}</span>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 alert alert-info ">
+                                    <span class=" left">{{ op_pos.1.text_pt | safe }}</span>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 alert bg-pink right">
+                                    <span class=" right">{{ op_neg.1.text_pt | safe }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="card" id="cardPrincipaisTópicos">
                         <div class="header">

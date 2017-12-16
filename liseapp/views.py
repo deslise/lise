@@ -13,7 +13,7 @@ from django.views.defaults import page_not_found
 
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification, list_weekhours_majority, \
-    list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small
+    list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small, prepare_opinions
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness, RequestCategory
 
@@ -100,12 +100,13 @@ def dashboardDetails(request, plan_id):
     weekhours_max = list_weekhours_majority(category=plan.category)
     class_css = ['bg-pink', "bg-cyan", "bg-orange", "bg-teal", "bg-purple", 'bg-blue-grey', 'bg-indigo']
     for i, week in enumerate(weekhours_max): week.update({'class_css': class_css[i]})
-    ranking = ranking_business(plan.category)[0:7]
+    ranking = ranking_business(plan.category)[0:6]
     sublocation, count_sub = list_sublocations_small(plan.category)
+    opinions_pos, opinions_neg = prepare_opinions(plan.category)
     vals = dict(dict_base(request), **{'item':'all',
         'plan':plan, 'rivals': rivals, 'sublocation':sublocation, 'count_sub':count_sub, 'reviews': reviews, 'nouns':nouns, 'lngs': lng, 'lats': lat,
         'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu, 'week_count': week_count,
-        'weekhours_max':weekhours_max, 'ranking':ranking})
+        'weekhours_max':weekhours_max, 'ranking':ranking, 'op_pos':opinions_pos[:2], 'op_neg':opinions_neg[:2]})
     return render(request, 'dashboard.html', vals)
 
 
@@ -178,6 +179,15 @@ def competitionRegions(request, plan_id):
     vals = dict(dict_base(request), **{
         'plan':plan, 'item':'maps', 'subitem':'competitionregions', 'lngs':lng, 'lats':lat})
     return render(request, 'competition-regions.html', vals)
+
+
+def competitorOpinions(request, plan_id):
+    plan = BusinessPlan.objects.get(id=plan_id)
+    opinions_pos, opinions_neg = prepare_opinions(plan.category)
+    vals = dict(dict_base(request), **{'plan':plan, 'item':'review','subitem':'competitoropinions',
+                                       'opinions_pos':opinions_pos, 'opinions_neg':opinions_neg})
+    return render(request, 'competitor-opinions.html', vals)
+
 
 
 def registerPlan(request):

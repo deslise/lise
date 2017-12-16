@@ -1,4 +1,5 @@
 from datetime import date
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -33,7 +34,7 @@ class RequestCategory(models.Model):
     branch = models.CharField(max_length=240)
     description = models.TextField()
     status = models.CharField(max_length=8, choices=STATUS, default='pendente')
-    date_request = models.DateField(default=date.today())
+    date_request = models.DateTimeField(default=timezone.now())
     reason_refuse = models.TextField(null=True, blank=True)
     enterprising = models.ForeignKey('Enterprising', on_delete=models.CASCADE, related_name='requests')
     category_related = models.ForeignKey('CategoryBusiness', on_delete=models.CASCADE, related_name='requestcategories', blank=True, null=True)
@@ -97,6 +98,9 @@ class Business(models.Model):
     location = models.CharField(max_length=100)
     rating = models.FloatField(default=0.0)
     sublocation = models.CharField(max_length=100, default='')
+    is_phone = models.BooleanField(default=False)
+    is_website = models.BooleanField(default=False)
+    is_face = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -113,9 +117,11 @@ class Weekday(models.Model):
 
 
 class Review(models.Model):
-    review_id = models.CharField(max_length=50)
+    review_id = models.CharField(max_length=50, unique=True)
     complete_text = models.CharField(max_length=500)
     business = models.ForeignKey('Business', on_delete=models.CASCADE, related_name='reviews')
+    date_posted = models.DateTimeField(blank=True, null=True)
+    date_collect = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.complete_text
@@ -141,18 +147,18 @@ class Topic(models.Model):
 
 class ItemTopic(models.Model):
     STATUS = (('novo', 'Novo'),('ativo','Ativo'),('recusado','Recusado'))
-    noun = models.CharField(max_length=50)
+    lemma = models.CharField(max_length=50)
     topic = models.ForeignKey('Topic', on_delete=models.CASCADE, related_name='itemtopics', null=True)
     status = models.CharField(max_length=20, choices=STATUS, default='novo')
     categories = models.ManyToManyField('CategoryBusiness')
     context = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.noun
+        return self.lemma
 
     def save(self, *args, **kwargs):
         super(ItemTopic, self).save(*args, **kwargs)
-        if self.status == 'ativo': identify_all_opinion_by_noun(self.noun, self.topic)
+        if self.status == 'ativo': identify_all_opinion_by_lemma(self.lemma, self.topic)
         return self
 
     def get_admin_url(self):
@@ -166,6 +172,8 @@ class Opinion(models.Model):
     polarity = models.IntegerField()
     review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='opinions')
     topics = models.ManyToManyField('Topic', blank=True)
+    nouns = models.TextField(default='')
+
 
     def __str__(self):
         return self.text_pt
@@ -207,8 +215,8 @@ class DataUpdate(models.Model):
 
 
 
-def identify_all_opinion_by_noun(noun, topic):
-    opinions = Opinion.objects.filter(lemmatized__contains=noun)
+def identify_all_opinion_by_lemma(lemma, topic):
+    opinions = Opinion.objects.filter(lemmatized__contains=lemma)
     for opinion in opinions:
         opinion.topics.add(topic)
     return opinions

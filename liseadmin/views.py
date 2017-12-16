@@ -99,6 +99,6 @@ def manageTopics(request):
     items = []
     for c in CategoryBusiness.objects.all():
         it = ItemTopic.objects.filter(categories=c,status='ativo')
-        items.extend(map(lambda i: {'noun':i.noun, 'topic':i.topic, 'category':c},it))
+        items.extend(map(lambda i: {'noun':i.lemma, 'topic':i.topic, 'category':c},it))
     vals = {'topics':topics,'items':items}
     return render(request, 'manage-topics.html', vals)

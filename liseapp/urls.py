@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^plan/(?P<plan_id>\d+)/competitionregions$', views.competitionRegions, name='competition-regions'),
     url(r'^plan/(?P<plan_id>\d+)/rankingbusiness$', views.rankingBusiness, name='ranking-business'),
     url(r'^plan/(?P<plan_id>\d+)/sublocations$', views.sublocations, name='sublocations'),
+    url(r'^plan/(?P<plan_id>\d+)/competitoropinions$', views.competitorOpinions, name='competitor-opinions'),
     url(r'^plan/register$', views.registerPlan, name='register-plan'),
     url(r'^plan/delete/(?P<plan_id>\d+)$', views.deletePlan, name='delete-plan'),
     url(r'^notifications/$', views.pageNotifications, name='notifications'),

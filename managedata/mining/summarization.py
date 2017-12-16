@@ -12,7 +12,7 @@ class Summarization(object):
 
     def identify_opinion_topics(self, opinion):
         try:
-            nouns = list(filter(lambda x: x.pos == 'n', self.cogroo.analyze(opinion.text_pt.lower()).sentences[0].tokens))
+            nouns = map(lambda n: self.cogroo.analyze(n).sentences[0].tokens[0], opinion.nouns.split(' - '))
             topics = self.check_topics(nouns, opinion)
             for topic in topics:
                 opinion.topics.add(topic)
@@ -20,13 +20,11 @@ class Summarization(object):
             print(e)
 
 
-
-
     def check_topics(self, nouns, opinion):
         category = opinion.review.business.category
         topics = []
         for noun in nouns:
-            itemsTopics = ItemTopic.objects.filter(noun=noun.lemma)
+            itemsTopics = ItemTopic.objects.filter(lemma=noun.lemma)
             if itemsTopics:
                 item = itemsTopics.first()
                 if category in item.categories.all():
@@ -37,7 +35,7 @@ class Summarization(object):
                     item.save(force_update=True)
                     item.categories.add(category)
             else:
-                item = ItemTopic.objects.create(noun=noun.lemma,context=opinion.text_pt)
+                item = ItemTopic.objects.create(lemma=noun.lemma,context=opinion.text_pt)
                 item.categories.add(category)
                 print(noun.lemma)
         return topics

@@ -6,6 +6,7 @@ from functools import reduce
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 from django.db.models import Count
@@ -17,7 +18,7 @@ from managedata.models import Opinion, Topic, Weekday, Business, Enterprising
 class Notification(models.Model):
     title = models.CharField(max_length=248)
     message = models.TextField()
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now())
     user = models.ForeignKey(Enterprising, on_delete=models.CASCADE)
     viewed = models.BooleanField(default=False)
 
@@ -30,7 +31,7 @@ class Notification(models.Model):
 
 
     def days_ago_created(self):
-        ago = (datetime.now().date() - self.date.date()).days
+        ago = (timezone.now().date() - self.date.date()).days
         return 'hoje' if ago == 0 else '1 dia atrás'if ago==1 else '%d dias atrás' % (ago)
 
     def get_href(self):
@@ -155,6 +156,24 @@ def list_sublocations_small(category):
     total = reduce(lambda x,y:x+y, count)
     count = count[:4]+[round(rest/total*100,2)]
     return sublocation,count
+
+
+def prepare_opinions(category):
+    opinions_pos = Opinion.objects.filter(review__business__category=category, polarity=1)
+    opinions_neg = Opinion.objects.filter(review__business__category=category, polarity=-1)
+    pos, neg = black_noun_text(opinions_pos), black_noun_text(opinions_neg)
+    # pos, neg = opinions_pos, opinions_neg
+    return pos, neg
+
+
+def black_noun_text(opinions):
+    l = []
+    for op in opinions:
+        text = op.text_pt
+        for noun in op.nouns.split(' - '):
+            text = text.replace(noun.lower(), '<b>%s</b>' % noun).replace(noun.capitalize(), '<b>%s</b>' % noun.capitalize())
+        l.append({'text_pt': text, 'review': op.review})
+    return l
 
 
 class EmailBackend(ModelBackend):

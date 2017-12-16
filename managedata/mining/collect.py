@@ -1,3 +1,7 @@
+from datetime import date, datetime
+
+from dateutil.relativedelta import relativedelta
+
 from managedata.mining.classification import AnalyzeVader
 from managedata.mining.organization import Organization
 from managedata.models import Keyword, Business, Review, Opinion, Weekday
@@ -19,10 +23,18 @@ class CollectRival(object):
             sl= list(map(lambda x: x['short_name'],
                         filter(lambda x: 'sublocality' in x['types'], place.get('address_components',[]))))
             defaults={'name':place['name'],'category':self.category,'location':place['geometry']['location'],
-                      'rating':place.get('rating',0),'sublocation':sl[0] if sl else ''}
+                      'rating':place.get('rating',0),'sublocation':sl[0] if sl else '',
+                      'is_phone':self.search_phone(place), 'is_website':self.search_website(place)}
             business = Business.objects.update_or_create(place_id=place['place_id'],defaults=defaults)
             self.collect_opening_hours(place, business[0])
 
+
+    def search_phone(self, place):
+        return 'formatted_phone_number' in place
+
+
+    def search_website(self, place):
+        return 'website' in place
 
 
     def collect_opening_hours(self, place, business):
@@ -69,9 +81,15 @@ class CollectReview(object):
             business = Business.objects.get(place_id=id)
             for review in result.setdefault('reviews', {}):
                 review_id = review['author_url'].split('/')[5] + '/' + id if review.get('author_url') else False
-                if review_id not in reviews_ids and review['text'] != '':
-                    review = Review.objects.create(review_id=review_id, complete_text=review['text'], business=business)
+                if review_id and review_id not in reviews_ids and review['text'] != '':
+                    review = Review.objects.create(review_id=review_id, complete_text=review['text'], business=business,
+                            date_posted=self.calcule_date_posted(review['time']), date_collect=datetime.now())
                     self.saveOpinions(review)
+
+
+
+    def calcule_date_posted(self, seconds):
+        return date(1970,1,1) + relativedelta(seconds=+seconds)
 
 
     def saveOpinions(self, review):
@@ -82,8 +100,11 @@ class CollectReview(object):
         vader = AnalyzeVader()
         for sentence in sentences_dict.items():
             polarity = vader.polarity(sentence[0])
-            lemmatized = ' '.join(map(lambda x: x.lemma, org.tokens_cogroo(sentence[1])))
-            Opinion.objects.create(text_pt=sentence[1], text_en=sentence[0], polarity=polarity, review=review, lemmatized=lemmatized)
+            tokens = org.tokens_cogroo(sentence[1])
+            lemmatized = ' '.join(map(lambda x: x.lemma, tokens))
+            nouns = ' - '.join(map(lambda x: x.lexeme, filter(lambda x: x.pos == 'n', tokens)))
+            Opinion.objects.create(text_pt=sentence[1], text_en=sentence[0], polarity=polarity, review=review,
+                                   lemmatized=lemmatized, nouns=nouns)
 
 
 

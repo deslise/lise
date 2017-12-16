@@ -1,0 +1,83 @@
+{% extends 'base-dashboard.html' %}
+
+{% load staticfiles %}
+
+{% block dashboard %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>OPINIÕES SOBRE OS CONCORRENTES</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    AVALIAÇÃO
+                                </div>
+                                <div class="body bg-blue-grey">
+                                    As avaliações dos clientes julgam os principais pontos dos estabelecimentos. Através
+                                    disso, pode-se analisar defeitos e qualidade no mercado da categoria.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card" id="cardDiasDeFuncionamento">
+                        <div class="header">
+                            <h2>AVALIAÇÕES POSITIVAS E NEGATIVAS</h2>
+                        </div>
+                        <div class="body">
+                            <ul class="nav nav-tabs tab-nav-right " role="tablist">
+                                <li role="presentation" class="active"><a href="#positive" data-toggle="tab">POSITIVA</a></li>
+                                <li role="presentation" class=" "><a href="#negative" data-toggle="tab">NEGATIVA</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="positive">
+
+                                    {% for op in opinions_pos %}
+                                    <div class="alert alert-info">
+                                        <!--<strong> <b>Home Content</b></strong>-->
+                                        <small style="float:right;" ><span class="badge ">{{ op.review.date_posted }}</span></small>
+                                        {{ op.text_pt | safe }}
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade in" id="negative">
+                                    {% for op in opinions_neg %}
+                                    <div class="alert bg-pink">
+                                        <!--<strong> Profile Content</strong>-->
+
+                                        <small style="float:right;" ><span class="badge ">{{ op.review.date_posted }}</span></small>
+                                        {{ op.text_pt | safe }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <script src="{% static 'js/pages/operating-days.js' %}"></script>
+
+{% endblock %}
