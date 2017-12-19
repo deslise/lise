@@ -22,7 +22,7 @@
                     </tr>
                     {% for item in items %}
                     <tr id="item{{ item.id }}">
-                        <td>{{ item.noun }}</td>
+                        <td>{{ item.lemma }}</td>
                         <td>{{ item.context }}</td>
                         <td>{{ item.categories.last }}</td>
                         <td><a href="javascript:void(0);" onclick="editItem({{ item.id }})"><img src="{% static 'admin/img/icon-yes.svg' %}"></a></td>

@@ -43,7 +43,9 @@
                                     {% for op in opinions_pos %}
                                     <div class="alert alert-info">
                                         <!--<strong> <b>Home Content</b></strong>-->
+                                        {% if op.review.date_posted %}
                                         <small style="float:right;" ><span class="badge ">{{ op.review.date_posted }}</span></small>
+                                        {% endif %}
                                         {{ op.text_pt | safe }}
                                     </div>
                                     {% endfor %}

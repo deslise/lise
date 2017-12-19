@@ -13,7 +13,8 @@ from django.views.defaults import page_not_found
 
 from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDescriptionPlan, EditMyAccount
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification, list_weekhours_majority, \
-    list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small, prepare_opinions
+    list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small, prepare_opinions, \
+    percentage_means_contact, mixture_percentage_means
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness, RequestCategory
 
@@ -103,10 +104,12 @@ def dashboardDetails(request, plan_id):
     ranking = ranking_business(plan.category)[0:6]
     sublocation, count_sub = list_sublocations_small(plan.category)
     opinions_pos, opinions_neg = prepare_opinions(plan.category)
+    phone, site, face = percentage_means_contact(plan.category)
     vals = dict(dict_base(request), **{'item':'all',
         'plan':plan, 'rivals': rivals, 'sublocation':sublocation, 'count_sub':count_sub, 'reviews': reviews, 'nouns':nouns, 'lngs': lng, 'lats': lat,
         'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu, 'week_count': week_count,
-        'weekhours_max':weekhours_max, 'ranking':ranking, 'op_pos':opinions_pos[:2], 'op_neg':opinions_neg[:2]})
+        'weekhours_max':weekhours_max, 'ranking':ranking, 'op_pos':opinions_pos[:2], 'op_neg':opinions_neg[:2], 'phone': phone,
+                                       'site': site, 'face': face,})
     return render(request, 'dashboard.html', vals)
 
 
@@ -187,6 +190,15 @@ def competitorOpinions(request, plan_id):
     vals = dict(dict_base(request), **{'plan':plan, 'item':'review','subitem':'competitoropinions',
                                        'opinions_pos':opinions_pos, 'opinions_neg':opinions_neg})
     return render(request, 'competitor-opinions.html', vals)
+
+
+def meansContact(request, plan_id):
+    plan = BusinessPlan.objects.get(id=plan_id)
+    phone, site, face = percentage_means_contact(plan.category)
+    mixture = mixture_percentage_means(plan.category)
+    vals = dict(dict_base(request), **{'plan': plan, 'item': 'contact', 'subitem': 'means', 'phone': phone,
+                                       'site': site, 'face': face, 'mixture':mixture})
+    return render(request, 'means-contact.html', vals)
 
 
 

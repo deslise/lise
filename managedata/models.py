@@ -98,9 +98,9 @@ class Business(models.Model):
     location = models.CharField(max_length=100)
     rating = models.FloatField(default=0.0)
     sublocation = models.CharField(max_length=100, default='')
-    is_phone = models.BooleanField(default=False)
-    is_website = models.BooleanField(default=False)
-    is_face = models.BooleanField(default=False)
+    phone = models.CharField(max_length=50, default='', blank=True)
+    website = models.CharField(max_length=50, default='', blank=True)
+    facebook = models.CharField(max_length=30, default='', blank=True)
 
 
     def __str__(self):
@@ -195,6 +195,10 @@ class BusinessPlan(models.Model):
 
     def location(self):
         return '%s, %s' % (self.city, self.state)
+
+
+    def __str__(self):
+        return '%s em %s de %s' % (self.category.specialty, self.city, self.enterprising)
 
 
 class DataUpdate(models.Model):

@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+import facebook
 from dateutil.relativedelta import relativedelta
 
 from managedata.mining.classification import AnalyzeVader
@@ -24,17 +25,27 @@ class CollectRival(object):
                         filter(lambda x: 'sublocality' in x['types'], place.get('address_components',[]))))
             defaults={'name':place['name'],'category':self.category,'location':place['geometry']['location'],
                       'rating':place.get('rating',0),'sublocation':sl[0] if sl else '',
-                      'is_phone':self.search_phone(place), 'is_website':self.search_website(place)}
+                      'phone':self.search_phone(place), 'website':self.search_website(place),
+                      'facebook':self.search_id_facebook(place)}
             business = Business.objects.update_or_create(place_id=place['place_id'],defaults=defaults)
             self.collect_opening_hours(place, business[0])
 
 
     def search_phone(self, place):
-        return 'formatted_phone_number' in place
+        return place.get('formatted_phone_number', '')
 
 
     def search_website(self, place):
-        return 'website' in place
+        return place.get('website', '')
+
+
+    def search_id_facebook(self, place):
+        ACCESS_TOKEN = '259215647870773|EHgeXOfZRcNs7yBMnro7yKTXo_8'
+        f = facebook.GraphAPI(ACCESS_TOKEN)
+        page = f.request("search", {'q': place['name']+' '+self.address.split(', ')[0],'type': 'page', 'limit':1})['data']
+        return page[0]['id'] if page else ''
+
+
 
 
     def collect_opening_hours(self, place, business):

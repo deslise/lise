@@ -176,6 +176,31 @@ def black_noun_text(opinions):
     return l
 
 
+def percentage_means_contact(category):
+    b = Business.objects.filter(category=category)
+    phone = b.exclude(phone='').count() / b.count() * 100
+    website = b.exclude(website='').count() / b.count() * 100
+    fanpage = b.exclude(facebook='').count() / b.count() * 100
+    return round(phone, 2), round(website, 2), round(fanpage, 2)
+
+def mixture_percentage_means(category):
+    b = Business.objects.filter(category=category)
+    a_phone = round(b.filter(website='', facebook='').exclude(phone='').count() / b.count() * 100, 2)
+    a_site = round(b.filter(phone='', facebook='').exclude(website='').count() / b.count() * 100, 2)
+    a_face = round(b.filter(website='', phone='').exclude(facebook='').count() / b.count() * 100, 2)
+    phone_site = round(b.filter(facebook='').exclude(phone='').exclude(website='').count() / b.count() * 100, 2)
+    phone_face = round(b.filter(website='').exclude(phone='').exclude(facebook='').count() / b.count() * 100, 2)
+    site_face = round(b.filter(phone='').exclude(website='').exclude(facebook='').count() / b.count() * 100, 2)
+    phone_site_face = round(b.exclude(website='').exclude(facebook='').exclude(phone='').count() / b.count() * 100, 2)
+    none = round(b.filter(website='', facebook='', phone='').count() / b.count() * 100, 2)
+    # ["Somente Telefone", "Somente Website", "Somente Fanpage", 'Telefone e Website', 'Telefone e Fanpage',
+    # 'Website e Fanpage', 'Telefone, Website e Fanpage', 'Nenhum']
+    l_phone = [a_phone, a_site, a_face, phone_site, phone_face, site_face, phone_site_face, none]
+    return l_phone
+
+
+
+
 class EmailBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):
         UserModel = get_user_model()

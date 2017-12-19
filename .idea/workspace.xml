@@ -2,32 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94c63bbb-b5aa-4c10-860f-d6010ff1a159" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0010_auto_20171215_0250.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0011_auto_20171215_2355.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0012_auto_20171216_0040.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0013_auto_20171216_0048.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0014_auto_20171216_0117.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0015_auto_20171216_0119.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0016_auto_20171216_0120.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/migrations/0017_auto_20171216_0120.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0040_auto_20171215_0250.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0041_auto_20171215_2355.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0042_auto_20171216_0040.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0043_auto_20171216_0048.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0044_auto_20171216_0120.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/managedata/migrations/0045_auto_20171216_0120.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/.babelrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/.eslintrc.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/.npmignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.cjs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.cjs.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.mjs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/dist/patternomaly.mjs.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/rollup.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/patterns.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/box.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/cross-dash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/cross.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/dash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/diagonal-right-left.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/diagonal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/diamond-box.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/diamond.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/disc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/dot-dash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/dot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/line-vertical.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/line.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/plus.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/ring.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/shape.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/shapes-list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/square.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/triangle-inverted.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/triangle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/weave.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/zigzag-vertical.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/zigzag.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/liseapp/templates/means-contact.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lise/settings.py" afterPath="$PROJECT_DIR$/Lise/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseadmin/views.py" afterPath="$PROJECT_DIR$/liseadmin/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseadmin/templates/new-items.html" afterPath="$PROJECT_DIR$/liseadmin/templates/new-items.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/models.py" afterPath="$PROJECT_DIR$/liseapp/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/templates/base-dashboard.html" afterPath="$PROJECT_DIR$/liseapp/templates/base-dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" afterPath="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/templates/dashboard.html" afterPath="$PROJECT_DIR$/liseapp/templates/dashboard.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/urls.py" afterPath="$PROJECT_DIR$/liseapp/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/views.py" afterPath="$PROJECT_DIR$/liseapp/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/managedata/mining/collect.py" afterPath="$PROJECT_DIR$/managedata/mining/collect.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/managedata/mining/summarization.py" afterPath="$PROJECT_DIR$/managedata/mining/summarization.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/managedata/models.py" afterPath="$PROJECT_DIR$/managedata/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,31 +68,41 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liseapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
+            <state relative-caret-position="218">
+              <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python3.5/dist-packages/django/core/handlers/base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2970">
               <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liseapp/templates/index.html">
+      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liseapp/templates/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1188">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="18">
+              <caret line="129" column="74" lean-forward="false" selection-start-line="129" selection-start-column="74" selection-end-line="129" selection-end-column="74" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/liseapp/templates/dashboard.html">
+      <file leaf-file-name="new-items.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liseadmin/templates/new-items.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#2;n#div#0;n#section#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="53">
+              <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,43 +110,28 @@
       <file leaf-file-name="competitor-opinions.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liseapp/templates/competitor-opinions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="57" column="61" lean-forward="false" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
-              <folding>
-                <element signature="n#style#0;n#small#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#small#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notification.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liseapp/templates/notification.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="35" column="49" lean-forward="true" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="55" />
+            <state relative-caret-position="130">
+              <caret line="47" column="46" lean-forward="false" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collect.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/managedata/mining/collect.py">
+      <file leaf-file-name="means-contact.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liseapp/templates/means-contact.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="65" column="46" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/liseapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="172" column="42" lean-forward="true" selection-start-line="172" selection-start-column="42" selection-end-line="172" selection-end-column="42" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -119,21 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="run_mining.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/managedata/mining/run_mining.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/managedata/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/liseapp/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="81" column="93" lean-forward="false" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="93" />
+            <state relative-caret-position="727">
+              <caret line="200" column="64" lean-forward="false" selection-start-line="200" selection-start-column="64" selection-end-line="200" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -142,8 +152,18 @@
       <file leaf-file-name="base-dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/liseapp/templates/base-dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1390">
-              <caret line="87" column="61" lean-forward="false" selection-start-line="87" selection-start-column="61" selection-end-line="87" selection-end-column="61" />
+            <state relative-caret-position="1800">
+              <caret line="100" column="58" lean-forward="false" selection-start-line="100" selection-start-column="58" selection-end-line="100" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/liseapp/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="19" column="88" lean-forward="false" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -203,7 +223,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/liseadmin/static/css/style.css" />
         <option value="$PROJECT_DIR$/Lise/static_root/admin/css/base.css" />
         <option value="$PROJECT_DIR$/liseadmin/static/css/style-admin.css" />
         <option value="$PROJECT_DIR$/liseadmin/dashboard.py" />
@@ -226,7 +245,6 @@
         <option value="$PROJECT_DIR$/liseapp/static/js/pages/top-topics.js" />
         <option value="$PROJECT_DIR$/managedata/util/stopwords.txt" />
         <option value="$PROJECT_DIR$/liseadmin/templates/manage-data.html" />
-        <option value="$PROJECT_DIR$/liseadmin/templates/new-items.html" />
         <option value="$PROJECT_DIR$/liseapp/templates/notification.html" />
         <option value="$PROJECT_DIR$/liseapp/templates/base.html" />
         <option value="$PROJECT_DIR$/liseadmin/templates/decline-request.html" />
@@ -241,27 +259,29 @@
         <option value="$PROJECT_DIR$/liseapp/templates/ranking-business.html" />
         <option value="$PROJECT_DIR$/liseapp/templates/sublocations.html" />
         <option value="$PROJECT_DIR$/liseapp/templates/operating-days.html" />
-        <option value="$PROJECT_DIR$/liseapp/urls.py" />
-        <option value="$PROJECT_DIR$/liseapp/templates/base-dashboard.html" />
         <option value="$PROJECT_DIR$/liseadmin/views.py" />
         <option value="$PROJECT_DIR$/managedata/mining/organization.py" />
-        <option value="$PROJECT_DIR$/managedata/models.py" />
         <option value="$PROJECT_DIR$/Lise/settings.py" />
         <option value="$PROJECT_DIR$/managedata/mining/summarization.py" />
-        <option value="$PROJECT_DIR$/managedata/mining/collect.py" />
         <option value="$PROJECT_DIR$/managedata/mining/run_mining.py" />
-        <option value="$PROJECT_DIR$/liseapp/models.py" />
-        <option value="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" />
+        <option value="$PROJECT_DIR$/managedata/models.py" />
+        <option value="$PROJECT_DIR$/managedata/mining/collect.py" />
+        <option value="$PROJECT_DIR$/liseapp/urls.py" />
+        <option value="$PROJECT_DIR$/liseapp/templates/base-dashboard.html" />
+        <option value="$PROJECT_DIR$/liseapp/templates/means-contact.html" />
         <option value="$PROJECT_DIR$/liseapp/views.py" />
+        <option value="$PROJECT_DIR$/liseadmin/templates/new-items.html" />
         <option value="$PROJECT_DIR$/liseapp/templates/dashboard.html" />
+        <option value="$PROJECT_DIR$/liseapp/templates/competitor-opinions.html" />
+        <option value="$PROJECT_DIR$/liseapp/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-11" />
-    <option name="width" value="1303" />
-    <option name="height" value="780" />
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1301" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -303,24 +323,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="managedata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="managedata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mining" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -384,71 +386,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="liseapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liseapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liseapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="charts" />
+              <option name="myItemId" value="liseadmin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -465,18 +403,8 @@
               <option name="myItemId" value="liseadmin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Lise" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -491,18 +419,18 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/liseapp/static/images" />
-      <recent name="$PROJECT_DIR$/liseapp/static/css" />
-      <recent name="$PROJECT_DIR$/Lise/static_root/lise" />
-      <recent name="$PROJECT_DIR$/Lise/static_root" />
-      <recent name="$PROJECT_DIR$/liseadmin/templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/liseapp/static/images" />
       <recent name="$PROJECT_DIR$/liseadmin" />
       <recent name="$PROJECT_DIR$/Lise" />
       <recent name="$PROJECT_DIR$/liseadmin/static_root/jet.dashboard/modules" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/liseapp/static/plugins" />
+      <recent name="$PROJECT_DIR$/liseapp/static/images" />
+      <recent name="$PROJECT_DIR$/liseapp/static/css" />
+      <recent name="$PROJECT_DIR$/Lise/static_root/lise" />
+      <recent name="$PROJECT_DIR$/Lise/static_root" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -762,13 +690,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5003984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45665634" sideWeight="0.5091633" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45665634" sideWeight="0.49083665" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -783,6 +710,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -831,7 +759,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/managedata/mining/collect.py</url>
-          <line>12</line>
+          <line>13</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -851,7 +779,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/managedata/mining/collect.py</url>
-          <line>71</line>
+          <line>82</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -896,7 +824,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>239</line>
+          <line>251</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -906,12 +834,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>47</line>
+          <line>48</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>65</line>
+          <line>66</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -951,17 +879,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/managedata/mining/collect.py</url>
-          <line>48</line>
+          <line>59</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>124</line>
+          <line>127</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>174</line>
+          <line>177</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -971,7 +899,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>221</line>
+          <line>233</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1006,33 +934,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>296</line>
+          <line>308</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>138</line>
+          <line>141</line>
           <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>140</line>
+          <line>143</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>145</line>
+          <line>148</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/managedata/mining/collect.py</url>
-          <line>76</line>
+          <line>87</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/liseapp/views.py</url>
-          <line>184</line>
+          <line>187</line>
           <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/liseapp/models.py</url>
+          <line>186</line>
+          <option name="timeStamp" value="163" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1045,25 +978,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="149" />
+      <option name="time" value="164" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/liseadmin/templates/manage-plan.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="6" lean-forward="false" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/static/js/pages/polarity-topics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/text_fixtures.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1134,13 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseadmin/templates/new-items.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1269,27 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2970">
-          <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/templates/sublocations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="34" column="56" lean-forward="false" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="9" column="72" lean-forward="false" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/liseapp/templates/operating-days.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1301,7 +1192,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1327,7 +1217,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1335,115 +1224,152 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="139" column="30" lean-forward="false" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/managedata/mining/summarization.py">
+    <entry file="file://$PROJECT_DIR$/liseapp/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/managedata/models.py">
+    <entry file="file://$PROJECT_DIR$/liseapp/templates/notification.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="122" column="33" lean-forward="false" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/managedata/mining/collect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="630">
+          <caret line="35" column="49" lean-forward="false" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liseapp/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
+        <state relative-caret-position="1458">
           <caret line="81" column="93" lean-forward="false" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="93" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/managedata/mining/collect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/templates/sublocations.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="34" column="56" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="54" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/managedata/mining/summarization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/managedata/mining/run_mining.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+        <state relative-caret-position="270">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="19" column="88" lean-forward="false" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liseapp/templates/base-dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1390">
-          <caret line="87" column="61" lean-forward="false" selection-start-line="87" selection-start-column="61" selection-end-line="87" selection-end-column="61" />
+        <state relative-caret-position="1800">
+          <caret line="100" column="58" lean-forward="false" selection-start-line="100" selection-start-column="58" selection-end-line="100" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/templates/notification.html">
+    <entry file="file:///usr/local/lib/python3.5/dist-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="35" column="49" lean-forward="true" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1188">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/templates/competitor-opinions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="57" column="61" lean-forward="false" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#small#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#small#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/liseapp/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state relative-caret-position="2970">
           <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/static/plugins/patternomaly/src/shapes/box.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/liseapp/templates/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
-          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <caret line="129" column="74" lean-forward="false" selection-start-line="129" selection-start-column="74" selection-end-line="129" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/templates/competitor-opinions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="47" column="46" lean-forward="false" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseadmin/templates/new-items.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#2;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/templates/means-contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="65" column="46" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/managedata/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="727">
+          <caret line="200" column="64" lean-forward="false" selection-start-line="200" selection-start-column="64" selection-end-line="200" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/liseapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="172" column="42" lean-forward="true" selection-start-line="172" selection-start-column="42" selection-end-line="172" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
