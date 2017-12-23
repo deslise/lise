@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94c63bbb-b5aa-4c10-860f-d6010ff1a159" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/managedata/migrations/0010_auto_20171117_0007.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/liseapp/templates/error-404.html" afterPath="$PROJECT_DIR$/liseapp/templates/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lise/settings.py" afterPath="$PROJECT_DIR$/Lise/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lise/urls.py" afterPath="$PROJECT_DIR$/Lise/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/static/css/style.css" afterPath="$PROJECT_DIR$/liseapp/static/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/templates/base.html" afterPath="$PROJECT_DIR$/liseapp/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/urls.py" afterPath="$PROJECT_DIR$/liseapp/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/liseapp/views.py" afterPath="$PROJECT_DIR$/liseapp/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/managedata/migrations/0011_requestcategory_date_request.py" afterPath="$PROJECT_DIR$/managedata/migrations/0011_requestcategory_date_request.py" />
-    </list>
+    <list default="true" id="94c63bbb-b5aa-4c10-860f-d6010ff1a159" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -662,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513704254506</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="configuração para criação de&#10; diagramas">
+      <created>1514062865781</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1514062865781</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -743,7 +738,8 @@
     <MESSAGE value="novos pontos de análise sublocation" />
     <MESSAGE value="add análise de opiniões de concorrentes" />
     <MESSAGE value="add análise de meios de contatos" />
-    <option name="LAST_COMMIT_MESSAGE" value="add análise de meios de contatos" />
+    <MESSAGE value="configuração para criação de&#10; diagramas" />
+    <option name="LAST_COMMIT_MESSAGE" value="configuração para criação de&#10; diagramas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
