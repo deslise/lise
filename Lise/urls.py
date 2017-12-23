@@ -23,8 +23,7 @@ urlpatterns = [
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('liseapp.urls', namespace='liseapp')),
     url(r'^admin/', include('liseadmin.urls', namespace='liseadmin')),
+    url(r'^', include('liseapp.urls', namespace='liseapp')),
 ]
-handler404 = views.error404
 

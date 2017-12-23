@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for Lise project.
 
@@ -33,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'jet.dashboard',
     'jet',
     'django.contrib.admin',
@@ -89,6 +92,11 @@ TEMPLATES = [
     },
 ]
 
+GRAPH_MODELS  =  {
+  'all_applications' :  False,
+  'group_models' :  True
+}
+
 
 
 WSGI_APPLICATION = 'Lise.wsgi.application'
@@ -101,6 +109,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'OPTIONS': {
+        #     'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+        # },
     }
 }
 

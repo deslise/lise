@@ -1,9 +1,13 @@
+from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
+from django.conf.urls import *
+from django.template.response import TemplateResponse
 
 from liseapp import views
 
-handler404 = 'views.error404'
+
+# handler404 = 'liseapp.views.error404'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -29,3 +33,7 @@ urlpatterns = [
     url(r'^changepassword/$', views.changePassword, name='change-password'),
     url(r'^forgotpassword/$', views.forgotPassword, name='forgot-password'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += [url(r'^', TemplateResponse, {'template':'404.html'})]

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -306,5 +307,5 @@ def logout(request):
 
 
 def error404(request):
-    return page_not_found(request, 'error-404.html')
+    return  render(request, '404.html')
 
