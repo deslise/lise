@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.contrib.auth.models import Permission
+
 from managedata.models import *
 
 admin.site.register(Branch)
@@ -15,3 +17,4 @@ admin.site.register(ItemTopic)
 admin.site.register(Enterprising)
 admin.site.register(Weekday)
 admin.site.register(RequestCategory)
+admin.site.register(Permission)

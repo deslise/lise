@@ -4,6 +4,7 @@ from datetime import date
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseNotFound
@@ -16,6 +17,7 @@ from liseapp.forms import RegisterForm, NewPlanForm, RequestCategoryForm, EditDe
 from liseapp.models import list_details_topics, list_weekdays, list_locations, Notification, list_weekhours_majority, \
     list_weekhours_minority, ranking_business, list_sublocations, list_sublocations_small, prepare_opinions, \
     percentage_means_contact, mixture_percentage_means
+from liseapp.permission import permission_access_plan
 from managedata.models import Enterprising, BusinessPlan, Business, Review, Opinion, Topic, Branch, \
     CategoryBusiness, RequestCategory
 
@@ -29,7 +31,7 @@ def dict_base(request):
     n_not_viewed = Notification.objects.filter(user=profile, viewed=False)[:5]
     return {'notifications':n, 'noti_no_viewed': n_not_viewed}
 
-
+@login_required()
 def index(request):
     profile = profileLoggedIn(request)
     plans = BusinessPlan.objects.filter(enterprising=profile, status='ativo')
@@ -45,7 +47,7 @@ def index(request):
     vals = dict(dict_base(request), **{'plans':plans, 'form':form})
     return render(request, 'index.html', vals)
 
-
+@login_required()
 def myAccountDetails(request):
     profile = profileLoggedIn(request)
 
@@ -84,9 +86,11 @@ def changePassword(request):
 def forgotPassword(request):
     return render(request, 'forgot-password.html')
 
-
+@login_required()
 def dashboardDetails(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     rivals = Business.objects.filter(category=plan.category)
     reviews = Review.objects.filter(business__category=plan.category)
     topics = list_details_topics(category=plan.category)
@@ -113,9 +117,11 @@ def dashboardDetails(request, plan_id):
                                        'site': site, 'face': face,})
     return render(request, 'dashboard.html', vals)
 
-
+@login_required()
 def topTopics(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     topics = Topic.objects.filter(opinion__review__business__category=plan.category).distinct()
     topics_list = list_details_topics(category=plan.category)
     counts = list(map(lambda x: x['count'], topics_list))
@@ -124,9 +130,11 @@ def topTopics(request, plan_id):
         'topics': topics, 'nouns':nouns, 'counts':counts})
     return render(request, 'top-topics.html', vals)
 
-
+@login_required()
 def polarityTopics(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     topics = list_details_topics(category=plan.category)
     counts = list(map(lambda x: x['count'], topics))
     pos = list(map(lambda x: x['count_pos'], topics))
@@ -138,33 +146,41 @@ def polarityTopics(request, plan_id):
         'topics_count':counts, 'count_pos': pos, 'count_neg': neg, 'count_neu': neu})
     return render(request, 'polarity-topics.html', vals)
 
-
+@login_required()
 def rankingBusiness(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     ranking = ranking_business(plan.category)
     vals = dict(dict_base(request), **{'item':'business', 'subitem':'rankingbusiness', 'plan':plan, 'ranking':ranking})
     return render(request, 'ranking-business.html', vals)
 
-
+@login_required()
 def sublocations(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     sublocation, count = list_sublocations(plan.category)
     vals = dict(dict_base(request), **{'plan': plan, 'item': 'maps', 'subitem': 'sublocations',
                                        'sublocation':sublocation, 'count':count})
     return render(request, 'sublocations.html', vals)
 
-
+@login_required()
 def operatingDays(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     week_count = list_weekdays(category=plan.category)
     counts = list(map(lambda x: x[1], week_count))
     vals = dict(dict_base(request), **{'plan':plan,
         'item':'operating', 'subitem':'operatingdays', 'week_count':week_count, 'counts':counts})
     return render(request, 'operating-days.html', vals)
 
-
+@login_required()
 def operatingHours(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     weekhours_max = list_weekhours_majority(category=plan.category)
     weekhours_min = list_weekhours_minority(category=plan.category)
     class_css = ['bg-pink',"bg-cyan","bg-orange","bg-teal", "bg-purple",'bg-blue-grey','bg-indigo']
@@ -174,9 +190,11 @@ def operatingHours(request, plan_id):
                                        'weekhours_max':weekhours_max, 'weekhours_min':weekhours_min})
     return render(request, 'operating-hours.html', vals)
 
-
+@login_required()
 def competitionRegions(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     lng_lat = list_locations(category=plan.category)
     lng = list(map(lambda l: l[0], lng_lat))
     lat = list(map(lambda l: l[1], lng_lat))
@@ -184,17 +202,22 @@ def competitionRegions(request, plan_id):
         'plan':plan, 'item':'maps', 'subitem':'competitionregions', 'lngs':lng, 'lats':lat})
     return render(request, 'competition-regions.html', vals)
 
-
+@login_required()
 def competitorOpinions(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     opinions_pos, opinions_neg = prepare_opinions(plan.category)
     vals = dict(dict_base(request), **{'plan':plan, 'item':'review','subitem':'competitoropinions',
                                        'opinions_pos':opinions_pos, 'opinions_neg':opinions_neg})
     return render(request, 'competitor-opinions.html', vals)
 
 
+@login_required()
 def meansContact(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     phone, site, face = percentage_means_contact(plan.category)
     mixture = mixture_percentage_means(plan.category)
     vals = dict(dict_base(request), **{'plan': plan, 'item': 'contact', 'subitem': 'means', 'phone': phone,
@@ -203,6 +226,7 @@ def meansContact(request, plan_id):
 
 
 
+@login_required()
 def registerPlan(request):
     enterprising = profileLoggedIn(request)
     branchs = sorted(CategoryBusiness.objects.filter(active=True).values_list('branch__name', flat=True).distinct())
@@ -249,8 +273,11 @@ def registerPlan(request):
     return render(request, 'register-plan.html', vals)
 
 
+@login_required()
 def deletePlan(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     plan.status='cancelada'
     plan.save(force_update='True')
     Notification.objects.create(title='Análise de concorrentes cancelado',
@@ -259,8 +286,11 @@ def deletePlan(request, plan_id):
     return redirect('liseapp:index')
 
 
+@login_required()
 def editPlan(request, plan_id):
-    plan = BusinessPlan.objects.get(id=plan_id)
+    try: plan = BusinessPlan.objects.get(id=plan_id)
+    except: return redirect('liseapp:no-access')
+    if not permission_access_plan(request, plan): return redirect('liseapp:no-access')
     branchs = CategoryBusiness.objects.filter(active=True).values_list('branch__name', flat=True).distinct()
     categories = [(branch, list(CategoryBusiness.objects.filter(active=True, branch__name=branch)
                                 .values_list('specialty', flat=True))) for branch in branchs]
@@ -268,6 +298,7 @@ def editPlan(request, plan_id):
     return render(request, 'edit-plan.html', vals)
 
 
+@login_required()
 def pageNotifications(request, pk=False):
     noti = Notification.objects.get(id=pk) if pk else False
     if noti:
@@ -302,10 +333,14 @@ def signUp(request):
     return render(request, 'sign-up.html', {'form': form})
 
 
+@login_required()
 def logout(request):
     return redirect('liseapp:signin')
 
 
 def error404(request):
     return  render(request, '404.html')
+
+def noAccess(request):
+    return render(request, 'no-access.html')
 

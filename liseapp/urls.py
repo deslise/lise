@@ -7,7 +7,6 @@ from django.template.response import TemplateResponse
 from liseapp import views
 
 
-# handler404 = 'liseapp.views.error404'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -32,6 +31,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': 'liseapp:signin'}, name='logout'),
     url(r'^changepassword/$', views.changePassword, name='change-password'),
     url(r'^forgotpassword/$', views.forgotPassword, name='forgot-password'),
+    url(r'^noaccess/$', views.noAccess, name='no-access'),
 ]
 
 
